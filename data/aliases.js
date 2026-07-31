@@ -196,12 +196,274 @@ const TOOL_INDEX = [
   },
   {
     id: "number-base",
-    title: "Binary / Decimal / Hex / ASCII",
+    title: "Binary / Decimal / Hex / Octal / ASCII",
     subtitle: "Number base & ASCII converter",
     icon: "binary",
     color: "purple",
     url: "pages/general.html?tab=base",
-    keywords: ["binary", "biner", "decimal", "desimal", "hex", "hexadecimal", "heksadesimal", "ascii", "number base", "basis bilangan"]
+    keywords: ["binary", "biner", "decimal", "desimal", "hex", "hexadecimal", "heksadesimal", "octal", "oktal", "ascii", "number base", "basis bilangan"]
+  },
+
+  // ===== V2: More Measurement =====
+  {
+    id: "density",
+    title: "Density Converter",
+    subtitle: "kg/m³, g/cm³, lb/ft³, specific gravity",
+    icon: "layers",
+    color: "blue",
+    url: "pages/measurement.html?type=density",
+    keywords: ["density", "densitas", "kerapatan", "kg/m3", "g/cm3", "lb/ft3", "specific gravity", "sg"]
+  },
+  {
+    id: "flowrate",
+    title: "Flow Rate Converter",
+    subtitle: "L/min, GPM, CFM, m³/hr",
+    icon: "droplets",
+    color: "blue",
+    url: "pages/measurement.html?type=flowrate",
+    keywords: ["flow rate", "laju aliran", "debit", "l/min", "gpm", "cfm", "m3/hr", "gph"]
+  },
+  {
+    id: "force",
+    title: "Force Converter",
+    subtitle: "N, kN, kgf, lbf, dyne",
+    icon: "move-down",
+    color: "blue",
+    url: "pages/measurement.html?type=force",
+    keywords: ["force", "gaya", "newton", "n", "kn", "kgf", "lbf", "dyne"]
+  },
+  {
+    id: "energy",
+    title: "Energy Converter",
+    subtitle: "J, kJ, cal, kcal, Wh, kWh, BTU",
+    icon: "battery-charging",
+    color: "blue",
+    url: "pages/measurement.html?type=energy",
+    keywords: ["energy", "energi", "joule", "kalori", "calorie", "wh", "kwh", "btu"]
+  },
+
+  // ===== V2: More Torque =====
+  {
+    id: "torque-crowfoot",
+    title: "Crowfoot Calculator",
+    subtitle: "Torque setting for crowfoot adapters",
+    icon: "wrench",
+    color: "orange",
+    url: "pages/torque.html?tab=crowfoot",
+    keywords: ["crowfoot", "crow foot", "crowfoot calculator", "torque crowfoot", "kalkulator crowfoot"]
+  },
+  {
+    id: "torque-angle",
+    title: "Torque Angle Calculator",
+    subtitle: "Torque-to-yield: snug torque + rotation angle",
+    icon: "rotate-cw",
+    color: "orange",
+    url: "pages/torque.html?tab=angle",
+    keywords: ["torque angle", "torque to yield", "tty", "sudut torsi", "turn of nut", "angle calculator"]
+  },
+  {
+    id: "torque-lookup",
+    title: "Fastener Torque Lookup",
+    subtitle: "Reference table by size & grade (Coming Soon)",
+    icon: "book-open",
+    color: "orange",
+    url: "pages/torque.html?tab=lookup",
+    keywords: ["fastener torque", "torque spec", "torque lookup", "bolt torque table", "tabel torsi baut"]
+  },
+
+  // ===== V2: Electrical Calculators =====
+  {
+    id: "ohms-law",
+    title: "Ohm's Law Calculator",
+    subtitle: "V = I × R",
+    icon: "activity",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["ohm's law", "ohms law", "hukum ohm", "v=ir", "voltage current resistance"]
+  },
+  {
+    id: "power-calc",
+    title: "Power Calculator",
+    subtitle: "P = V × I",
+    icon: "flame",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["power calculator", "kalkulator daya", "p=vi", "watt calculator"]
+  },
+  {
+    id: "voltage-drop",
+    title: "Voltage Drop Calculator",
+    subtitle: "Cable voltage drop by length & gauge",
+    icon: "trending-down",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["voltage drop", "drop tegangan", "cable voltage drop", "wire voltage drop"]
+  },
+  {
+    id: "series-resistance",
+    title: "Series Resistance Calculator",
+    subtitle: "R total = R1 + R2 + ...",
+    icon: "circuit-board",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["series resistance", "resistansi seri", "total resistance series"]
+  },
+  {
+    id: "parallel-resistance",
+    title: "Parallel Resistance Calculator",
+    subtitle: "1/R total = 1/R1 + 1/R2 + ...",
+    icon: "circuit-board",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["parallel resistance", "resistansi paralel", "total resistance parallel"]
+  },
+  {
+    id: "battery-capacity",
+    title: "Battery Capacity Calculator",
+    subtitle: "Ah × V = Wh",
+    icon: "battery",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["battery capacity", "kapasitas baterai", "ah to wh", "battery energy"]
+  },
+  {
+    id: "battery-runtime",
+    title: "Battery Runtime Calculator",
+    subtitle: "Estimated hours = Ah ÷ load current",
+    icon: "battery",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["battery runtime", "waktu pakai baterai", "battery life calculator"]
+  },
+  {
+    id: "awg-converter",
+    title: "AWG ↔ mm² Converter",
+    subtitle: "Wire gauge to cross-section area",
+    icon: "cable",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["awg", "awg to mm2", "wire gauge", "kabel awg", "american wire gauge"]
+  },
+  {
+    id: "wire-resistance",
+    title: "Wire Resistance Calculator",
+    subtitle: "R = ρ × L / A",
+    icon: "cable",
+    color: "green",
+    url: "pages/electrical.html?mode=calc",
+    keywords: ["wire resistance", "resistansi kabel", "kabel tembaga", "copper wire resistance"]
+  },
+
+  // ===== V2: More General =====
+  {
+    id: "percentage-calculator",
+    title: "Percentage Calculator",
+    subtitle: "X is what % of Y, and X% of Y",
+    icon: "percent",
+    color: "purple",
+    url: "pages/general.html?tab=percentage",
+    keywords: ["percentage", "persen", "percentage calculator", "kalkulator persen"]
+  },
+  {
+    id: "ratio-calculator",
+    title: "Ratio Calculator",
+    subtitle: "A:B = C:D",
+    icon: "divide",
+    color: "purple",
+    url: "pages/general.html?tab=ratio",
+    keywords: ["ratio", "rasio", "ratio calculator", "perbandingan"]
+  },
+  {
+    id: "scientific-notation",
+    title: "Scientific Notation Converter",
+    subtitle: "Standard number ↔ mantissa × 10^exponent",
+    icon: "sigma",
+    color: "purple",
+    url: "pages/general.html?tab=scinotation",
+    keywords: ["scientific notation", "notasi ilmiah", "exponent", "mantissa"]
+  },
+  {
+    id: "date-difference",
+    title: "Date Difference",
+    subtitle: "Days between two dates",
+    icon: "calendar-days",
+    color: "purple",
+    url: "pages/general.html?tab=datediff",
+    keywords: ["date difference", "selisih tanggal", "days between dates", "date calculator"]
+  },
+  {
+    id: "time-general",
+    title: "Time Converter",
+    subtitle: "ms, second, minute, hour, day",
+    icon: "clock",
+    color: "purple",
+    url: "pages/general.html?tab=time",
+    keywords: ["time converter", "konversi waktu"]
+  },
+  {
+    id: "scientific-calculator",
+    title: "Scientific Calculator",
+    subtitle: "Full engineering calculator with history",
+    icon: "calculator",
+    color: "purple",
+    url: "pages/calculator.html",
+    keywords: ["scientific calculator", "kalkulator ilmiah", "engineering calculator", "calculator", "kalkulator", "sin cos tan", "log ln"]
+  },
+
+  // ===== V2: Tools =====
+  {
+    id: "compass",
+    title: "Compass",
+    subtitle: "Digital heading, N/S/E/W",
+    icon: "compass",
+    color: "green",
+    url: "pages/tools.html?tool=compass",
+    keywords: ["compass", "kompas", "heading", "arah mata angin", "north"]
+  },
+  {
+    id: "stopwatch",
+    title: "Stopwatch",
+    subtitle: "Start, lap, reset",
+    icon: "timer",
+    color: "green",
+    url: "pages/tools.html?tool=stopwatch",
+    keywords: ["stopwatch", "stop watch", "lap timer"]
+  },
+  {
+    id: "timer",
+    title: "Timer",
+    subtitle: "Countdown timer",
+    icon: "hourglass",
+    color: "green",
+    url: "pages/tools.html?tool=timer",
+    keywords: ["timer", "countdown", "hitung mundur", "pengingat waktu"]
+  },
+  {
+    id: "level",
+    title: "Bubble Level",
+    subtitle: "Surface level using device sensor",
+    icon: "gauge",
+    color: "green",
+    url: "pages/tools.html?tool=level",
+    keywords: ["bubble level", "waterpas", "level", "spirit level"]
+  },
+  {
+    id: "protractor",
+    title: "Protractor / Angle Meter",
+    subtitle: "Angle measurement using device sensor",
+    icon: "triangle",
+    color: "green",
+    url: "pages/tools.html?tool=protractor",
+    keywords: ["protractor", "angle meter", "busur derajat", "pengukur sudut"]
+  },
+  {
+    id: "flashlight",
+    title: "Flashlight",
+    subtitle: "Camera LED torch shortcut",
+    icon: "flashlight",
+    color: "green",
+    url: "pages/tools.html?tool=flashlight",
+    keywords: ["flashlight", "senter", "torch", "lampu senter"]
   }
 ];
 

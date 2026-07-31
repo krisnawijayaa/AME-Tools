@@ -221,6 +221,61 @@ const UNIT_DATA = {
       uf: { name: "Microfarad", symbol: "µF", factor: 1000000 },
       f:  { name: "Farad", symbol: "F", factor: 1 }
     }
+  },
+  density: {
+    label: "Density",
+    labelId: "Densitas",
+    icon: "layers",
+    base: "kgm3",
+    units: {
+      kgm3: { name: "Kilogram/m³", symbol: "kg/m³", factor: 1 },
+      gcm3: { name: "Gram/cm³", symbol: "g/cm³", factor: 0.001 },
+      lbft3:{ name: "Pound/ft³", symbol: "lb/ft³", factor: 0.0624279606 },
+      lbgal:{ name: "Pound/US gal", symbol: "lb/gal", factor: 0.00834540445 },
+      sg:   { name: "Specific Gravity (water)", symbol: "SG", factor: 0.001 }
+    }
+  },
+  flowrate: {
+    label: "Flow Rate",
+    labelId: "Laju Aliran",
+    icon: "droplets",
+    base: "lmin",
+    units: {
+      lmin: { name: "Liter/minute", symbol: "L/min", factor: 1 },
+      lhr:  { name: "Liter/hour", symbol: "L/hr", factor: 60 },
+      m3hr: { name: "m³/hour", symbol: "m³/hr", factor: 0.06 },
+      gpm:  { name: "US Gallon/minute", symbol: "GPM", factor: 0.264172052 },
+      gph:  { name: "US Gallon/hour", symbol: "GPH", factor: 15.8503231 },
+      cfm:  { name: "Cubic Feet/minute", symbol: "CFM", factor: 0.0353146667 }
+    }
+  },
+  force: {
+    label: "Force",
+    labelId: "Gaya",
+    icon: "move-down",
+    base: "n",
+    units: {
+      n:   { name: "Newton", symbol: "N", factor: 1 },
+      kn:  { name: "Kilonewton", symbol: "kN", factor: 0.001 },
+      kgf: { name: "Kilogram-force", symbol: "kgf", factor: 0.10197162 },
+      lbf: { name: "Pound-force", symbol: "lbf", factor: 0.22480894 },
+      dyn: { name: "Dyne", symbol: "dyn", factor: 100000 }
+    }
+  },
+  energy: {
+    label: "Energy",
+    labelId: "Energi",
+    icon: "battery-charging",
+    base: "j",
+    units: {
+      j:   { name: "Joule", symbol: "J", factor: 1 },
+      kj:  { name: "Kilojoule", symbol: "kJ", factor: 0.001 },
+      cal: { name: "Calorie", symbol: "cal", factor: 0.239005736 },
+      kcal:{ name: "Kilocalorie", symbol: "kcal", factor: 0.000239005736 },
+      wh:  { name: "Watt-hour", symbol: "Wh", factor: 0.000277777778 },
+      kwh: { name: "Kilowatt-hour", symbol: "kWh", factor: 0.000000277777778 },
+      btu: { name: "BTU", symbol: "BTU", factor: 0.000947817 }
+    }
   }
 };
 
