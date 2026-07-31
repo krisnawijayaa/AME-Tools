@@ -1,0 +1,70 @@
+/* ========================================================
+   AME Toolbox — responsive.css
+   Mobile-first base is in main.css; this file adds
+   breakpoints for tablet & desktop.
+   ======================================================== */
+
+/* Tablet */
+@media (min-width: 640px) {
+  body {
+    max-width: 640px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 100vh;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .frac-result {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  body {
+    max-width: 760px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .category-card:hover {
+    background: var(--card-hover);
+    border-color: var(--blue);
+    cursor: pointer;
+  }
+
+  .tool-row:hover {
+    background: var(--card-hover);
+    cursor: pointer;
+  }
+
+  .chip:hover {
+    background: var(--card-hover);
+    cursor: pointer;
+  }
+
+  .nav-item:hover {
+    color: var(--text);
+    cursor: pointer;
+  }
+}
+
+/* Small phones — tighten spacing a touch */
+@media (max-width: 359px) {
+  .category-grid { gap: 8px; }
+  .category-card { padding: 12px; }
+  .unit-row .unit-labels { width: 76px; }
+  .unit-row input { font-size: 17px; }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .bottom-nav { padding: 4px 6px calc(4px + env(safe-area-inset-bottom)); }
+  .nav-item { font-size: 9px; padding: 4px 0; }
+}
