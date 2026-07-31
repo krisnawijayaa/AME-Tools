@@ -21,9 +21,16 @@
     <h1 id="pageTitle">Voltage Converter</h1>
   </div>
 
-  <div class="type-selector" id="typeSelector"></div>
+  <div class="tabs" id="modeTabs"></div>
 
-  <div class="converter-list fade-in" id="converterList"></div>
+  <div id="converterMode">
+    <div class="type-selector" id="typeSelector"></div>
+    <div class="converter-list fade-in" id="converterList"></div>
+  </div>
+
+  <div id="calcMode" class="fade-in hidden">
+    <div id="calcPanel"></div>
+  </div>
 
   <nav class="bottom-nav">
     <a class="nav-item" href="../index.html">
@@ -53,6 +60,8 @@
   <script src="../data/aliases.js"></script>
   <script src="../js/favorites.js"></script>
   <script src="../js/history.js"></script>
+  <script src="../js/converter-core.js"></script>
+  <script src="../js/electrical-calc.js"></script>
   <script src="../js/electrical.js"></script>
   <script>
     if ("serviceWorker" in navigator) {

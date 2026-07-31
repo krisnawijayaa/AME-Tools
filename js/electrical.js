@@ -1,24 +1,55 @@
 /**
  * electrical.js
- * Realtime unit converter for electrical quantities.
- * Reuses the same generic pattern as measurement.js but scoped
- * to the electrical unit types.
+ * Electrical section controller: two modes reused via the existing
+ * tabs component — "Converters" (unit converters, powered by
+ * converter-core.js) and "Calculators" (Ohm's Law, voltage drop, etc,
+ * implemented in electrical-calc.js).
  */
 
 const ELECTRICAL_TYPES = ["voltage", "current", "resistance", "power", "frequency", "capacitance"];
 
 let currentElecType = "voltage";
+let elecMode = "converters";
 
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const requested = params.get("type");
-  currentElecType = ELECTRICAL_TYPES.includes(requested) ? requested : "voltage";
+  const requestedType = params.get("type");
+  const requestedMode = params.get("mode");
+  currentElecType = ELECTRICAL_TYPES.includes(requestedType) ? requestedType : "voltage";
+  elecMode = requestedMode === "calc" ? "calc" : "converters";
 
-  window.History.add(currentElecType);
+  window.History.add(elecMode === "calc" ? "ohms-law" : currentElecType);
+
+  renderModeTabs();
   renderElecTypeSelector();
   renderElecConverter(currentElecType);
+  if (window.ElectricalCalc) window.ElectricalCalc.init(document.getElementById("calcPanel"));
+  switchMode(elecMode);
   if (window.lucide) lucide.createIcons();
 });
+
+function renderModeTabs() {
+  const tabs = document.getElementById("modeTabs");
+  if (!tabs) return;
+  tabs.innerHTML = `
+    <button class="tab-btn" data-mode="converters">Converters</button>
+    <button class="tab-btn" data-mode="calc">Calculators</button>
+  `;
+  tabs.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      elecMode = btn.dataset.mode;
+      history.replaceState(null, "", `?mode=${elecMode}`);
+      window.History.add(elecMode === "calc" ? "ohms-law" : currentElecType);
+      switchMode(elecMode);
+    });
+  });
+}
+
+function switchMode(mode) {
+  document.querySelectorAll("#modeTabs .tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.mode === mode));
+  document.getElementById("converterMode").classList.toggle("hidden", mode !== "converters");
+  document.getElementById("calcMode").classList.toggle("hidden", mode !== "calc");
+}
 
 function renderElecTypeSelector() {
   const wrap = document.getElementById("typeSelector");
@@ -42,56 +73,5 @@ function renderElecTypeSelector() {
 function renderElecConverter(type) {
   const list = document.getElementById("converterList");
   document.getElementById("pageTitle").textContent = UNIT_DATA[type].label + " Converter";
-  const def = UNIT_DATA[type];
-  const unitKeys = Object.keys(def.units);
-
-  list.innerHTML = unitKeys.map((key) => {
-    const u = def.units[key];
-    return `
-      <div class="unit-row" data-unit="${key}">
-        <div class="unit-labels">
-          <div class="u-symbol">${u.symbol}</div>
-          <div class="u-name">${u.name}</div>
-        </div>
-        <input type="text" inputmode="decimal" placeholder="0" data-unit="${key}" autocomplete="off" />
-      </div>
-    `;
-  }).join("");
-
-  const inputs = list.querySelectorAll("input");
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => onElecInput(type, input, inputs));
-    input.addEventListener("focus", () => {
-      list.querySelectorAll(".unit-row").forEach((r) => r.classList.remove("active-input"));
-      input.closest(".unit-row").classList.add("active-input");
-    });
-  });
-}
-
-function onElecInput(type, sourceInput, allInputs) {
-  const raw = sourceInput.value.replace(",", ".");
-  const value = parseFloat(raw);
-
-  if (raw.trim() === "" || isNaN(value)) {
-    allInputs.forEach((inp) => { if (inp !== sourceInput) inp.value = ""; });
-    return;
-  }
-
-  const def = UNIT_DATA[type];
-  const fromFactor = def.units[sourceInput.dataset.unit].factor;
-  const baseValue = value / fromFactor;
-
-  allInputs.forEach((inp) => {
-    if (inp === sourceInput) return;
-    const toFactor = def.units[inp.dataset.unit].factor;
-    inp.value = formatElecNumber(baseValue * toFactor);
-  });
-}
-
-function formatElecNumber(num) {
-  if (!isFinite(num)) return "";
-  const rounded = Math.abs(num) < 0.0001 && num !== 0
-    ? num.toExponential(4)
-    : parseFloat(num.toFixed(6)).toString();
-  return rounded;
+  window.ConverterCore.render(list, type);
 }

@@ -21,11 +21,27 @@
     <h1>General</h1>
   </div>
 
-  <div class="tabs" id="tabs"></div>
+  <div class="type-selector" id="tabs"></div>
 
   <div id="dec2fracPanel" class="fade-in"></div>
-  <div id="frac2decPanel" class="fade-in"></div>
-  <div id="basePanel" class="fade-in"></div>
+  <div id="frac2decPanel" class="fade-in hidden"></div>
+  <div id="basePanel" class="fade-in hidden"></div>
+  <div id="percentagePanel" class="fade-in hidden"></div>
+  <div id="ratioPanel" class="fade-in hidden"></div>
+  <div id="scinotationPanel" class="fade-in hidden"></div>
+  <div id="datediffPanel" class="fade-in hidden"></div>
+  <div id="timePanel" class="fade-in hidden"></div>
+
+  <div class="section">
+    <div class="section-title"><h2>More</h2></div>
+    <div class="tool-list">
+      <a class="tool-row" href="calculator.html">
+        <div class="t-icon accent-purple"><i data-lucide="calculator" style="width:18px;height:18px"></i></div>
+        <div class="t-info"><div class="t-title">Scientific Calculator</div><div class="t-sub">Full engineering calculator with history</div></div>
+        <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--text-faint)"></i>
+      </a>
+    </div>
+  </div>
 
   <nav class="bottom-nav">
     <a class="nav-item" href="../index.html">
@@ -55,6 +71,8 @@
   <script src="../data/aliases.js"></script>
   <script src="../js/favorites.js"></script>
   <script src="../js/history.js"></script>
+  <script src="../js/converter-core.js"></script>
+  <script src="../js/general-calc.js"></script>
   <script src="../js/general.js"></script>
   <script>
     if ("serviceWorker" in navigator) {

@@ -11,6 +11,7 @@ const CATEGORIES = [
   { id: "fastener", name: "Fastener", nameId: "Fastener", icon: "cog", color: "purple", url: "#", comingSoon: true, desc: "Bolts, threads & specs" },
   { id: "aircraft", name: "Aircraft", nameId: "Pesawat", icon: "plane", color: "blue", url: "#", comingSoon: true, desc: "Quick reference data" },
   { id: "general", name: "General", nameId: "Umum", icon: "calculator", color: "purple", url: "pages/general.html", desc: "Fraction, binary, hex" },
+  { id: "tools", name: "Tools", nameId: "Alat", icon: "compass", color: "green", url: "pages/tools.html", desc: "Compass, stopwatch, level" },
   { id: "maintenance", name: "Maintenance", nameId: "Perawatan", icon: "calendar", color: "orange", url: "#", comingSoon: true, desc: "Task tracking (soon)" }
 ];
 
@@ -136,8 +137,7 @@ function initSearch() {
     clearBtn.classList.toggle("hidden", q.length === 0);
 
     if (!q.trim()) {
-      suggestBox.classList.add("hidden");
-      suggestBox.innerHTML = "";
+      renderSearchLanding(suggestBox);
       return;
     }
 
@@ -150,7 +150,7 @@ function initSearch() {
     }
 
     suggestBox.innerHTML = results.slice(0, 8).map((t) => `
-      <a class="suggestion-item" href="${t.url}" onclick="History.add('${t.id}')">
+      <a class="suggestion-item" href="${t.url}" data-search-pick="${t.id}">
         <div class="suggestion-icon accent-${t.color}">${iconSvg(t.icon, 18)}</div>
         <div class="suggestion-text">
           <span class="t">${t.title}</span>
@@ -158,6 +158,41 @@ function initSearch() {
         </div>
       </a>
     `).join("");
+    suggestBox.querySelectorAll("[data-search-pick]").forEach((el) => {
+      el.addEventListener("click", () => {
+        History.add(el.dataset.searchPick);
+        window.SearchLog.add(input.value);
+      });
+    });
+    if (window.lucide) lucide.createIcons();
+  }
+
+  /** Shown when the search box is focused but empty: recent + popular searches. */
+  function renderSearchLanding(box) {
+    const recent = window.SearchLog.getAll();
+    const popular = window.POPULAR_SEARCHES;
+
+    if (recent.length === 0 && popular.length === 0) {
+      box.classList.add("hidden");
+      box.innerHTML = "";
+      return;
+    }
+
+    box.classList.remove("hidden");
+    box.innerHTML = `
+      ${recent.length ? `
+        <div class="suggestion-empty" style="text-align:left;padding:10px 14px 4px;font-weight:700;color:var(--text-dim);">Recent Searches</div>
+        ${recent.map((q) => `<a class="suggestion-item" data-fill="${escapeHtml(q)}"><div class="suggestion-icon accent-blue">${iconSvg("history", 16)}</div><div class="suggestion-text"><span class="t">${escapeHtml(q)}</span></div></a>`).join("")}
+      ` : ""}
+      <div class="suggestion-empty" style="text-align:left;padding:10px 14px 4px;font-weight:700;color:var(--text-dim);">Popular Searches</div>
+      ${popular.map((q) => `<a class="suggestion-item" data-fill="${escapeHtml(q)}"><div class="suggestion-icon accent-orange">${iconSvg("trending-up", 16)}</div><div class="suggestion-text"><span class="t">${escapeHtml(q)}</span></div></a>`).join("")}
+    `;
+    box.querySelectorAll("[data-fill]").forEach((el) => {
+      el.addEventListener("click", () => {
+        input.value = el.dataset.fill;
+        runSearch();
+      });
+    });
     if (window.lucide) lucide.createIcons();
   }
 

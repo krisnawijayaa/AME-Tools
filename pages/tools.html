@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-<title>Torque Converter & Calculator — AME Toolbox</title>
+<title>Tools — AME Toolbox</title>
 <meta name="theme-color" content="#0f1117" />
 <link rel="manifest" href="../manifest.json" />
 <link rel="icon" href="../assets/icons/icon-192.png" />
@@ -18,19 +18,12 @@
     <a class="back-btn" href="../index.html" aria-label="Back">
       <i data-lucide="arrow-left" style="width:18px;height:18px"></i>
     </a>
-    <h1>Torque</h1>
+    <h1>Tools</h1>
   </div>
 
-  <div class="type-selector" id="tabs"></div>
+  <div class="type-selector" id="typeSelector"></div>
 
-  <div id="unitPanel" class="fade-in">
-    <div class="converter-list" id="torqueConverterList"></div>
-  </div>
-
-  <div id="extensionPanel" class="fade-in hidden"></div>
-  <div id="crowfootPanel" class="fade-in hidden"></div>
-  <div id="anglePanel" class="fade-in hidden"></div>
-  <div id="lookupPanel" class="fade-in hidden"></div>
+  <div id="toolContent" class="fade-in"></div>
 
   <nav class="bottom-nav">
     <a class="nav-item" href="../index.html">
@@ -41,7 +34,7 @@
       <i data-lucide="ruler" style="width:20px;height:20px"></i>
       Measure
     </a>
-    <a class="nav-item active" href="torque.html">
+    <a class="nav-item" href="torque.html">
       <i data-lucide="wrench" style="width:20px;height:20px"></i>
       Torque
     </a>
@@ -56,12 +49,13 @@
   </nav>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="../data/units.js"></script>
-  <script src="../data/aliases.js"></script>
   <script src="../js/favorites.js"></script>
   <script src="../js/history.js"></script>
-  <script src="../js/converter-core.js"></script>
-  <script src="../js/torque.js"></script>
+  <script src="../js/tool-compass.js"></script>
+  <script src="../js/tool-timer.js"></script>
+  <script src="../js/tool-level.js"></script>
+  <script src="../js/tool-flashlight.js"></script>
+  <script src="../js/tools.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

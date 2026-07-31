@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-<title>Torque Converter & Calculator — AME Toolbox</title>
+<title>Scientific Calculator — AME Toolbox</title>
 <meta name="theme-color" content="#0f1117" />
 <link rel="manifest" href="../manifest.json" />
 <link rel="icon" href="../assets/icons/icon-192.png" />
@@ -15,22 +15,29 @@
 <body>
 
   <div class="topbar">
-    <a class="back-btn" href="../index.html" aria-label="Back">
+    <a class="back-btn" href="general.html" aria-label="Back">
       <i data-lucide="arrow-left" style="width:18px;height:18px"></i>
     </a>
-    <h1>Torque</h1>
+    <h1>Scientific Calculator</h1>
   </div>
 
-  <div class="type-selector" id="tabs"></div>
-
-  <div id="unitPanel" class="fade-in">
-    <div class="converter-list" id="torqueConverterList"></div>
+  <div class="panel calc-display">
+    <div class="calc-memory" id="calcMemory"></div>
+    <div class="calc-expr" id="calcExpr">0</div>
+    <div class="calc-display-actions">
+      <button class="chip" onclick="copyResult()"><i data-lucide="copy" style="width:14px;height:14px"></i> Copy</button>
+    </div>
   </div>
 
-  <div id="extensionPanel" class="fade-in hidden"></div>
-  <div id="crowfootPanel" class="fade-in hidden"></div>
-  <div id="anglePanel" class="fade-in hidden"></div>
-  <div id="lookupPanel" class="fade-in hidden"></div>
+  <div class="calc-keypad" id="calcKeypad"></div>
+
+  <section class="section">
+    <div class="section-title">
+      <h2>History</h2>
+      <button class="chip" onclick="clearAllHistory()" style="padding:6px 12px;">Clear All</button>
+    </div>
+    <div class="tool-list" id="calcHistoryList"></div>
+  </section>
 
   <nav class="bottom-nav">
     <a class="nav-item" href="../index.html">
@@ -41,7 +48,7 @@
       <i data-lucide="ruler" style="width:20px;height:20px"></i>
       Measure
     </a>
-    <a class="nav-item active" href="torque.html">
+    <a class="nav-item" href="torque.html">
       <i data-lucide="wrench" style="width:20px;height:20px"></i>
       Torque
     </a>
@@ -49,20 +56,21 @@
       <i data-lucide="zap" style="width:20px;height:20px"></i>
       Electrical
     </a>
-    <a class="nav-item" href="general.html">
+    <a class="nav-item active" href="general.html">
       <i data-lucide="calculator" style="width:20px;height:20px"></i>
       General
     </a>
   </nav>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="../data/units.js"></script>
-  <script src="../data/aliases.js"></script>
   <script src="../js/favorites.js"></script>
   <script src="../js/history.js"></script>
   <script src="../js/converter-core.js"></script>
-  <script src="../js/torque.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/calc-history.js"></script>
+  <script src="../js/calculator.js"></script>
   <script>
+    window.History.add("scientific-calculator");
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("../service-worker.js", { scope: "../" }).catch(() => {});

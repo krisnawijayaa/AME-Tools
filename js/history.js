@@ -5,7 +5,7 @@
 
 const History = (() => {
   const KEY = "ame_recent";
-  const MAX = 8;
+  const MAX = 20;
 
   function getAll() {
     try {
@@ -23,11 +23,16 @@ const History = (() => {
     localStorage.setItem(KEY, JSON.stringify(list));
   }
 
+  function remove(id) {
+    const list = getAll().filter((x) => x !== id);
+    localStorage.setItem(KEY, JSON.stringify(list));
+  }
+
   function clear() {
     localStorage.removeItem(KEY);
   }
 
-  return { getAll, add, clear };
+  return { getAll, add, remove, clear };
 })();
 
 window.History = History;
