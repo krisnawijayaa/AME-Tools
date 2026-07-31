@@ -4,7 +4,7 @@
  * Bump CACHE_VERSION whenever any cached file changes so old caches get purged.
  */
 
-const CACHE_VERSION = "ame-toolbox-v1";
+const CACHE_VERSION = "ame-toolbox-v2";
 const SCOPE = self.registration.scope; // works correctly under GitHub Pages subpaths too
 
 // Build absolute URLs relative to the service worker's registration scope
@@ -18,16 +18,29 @@ const CORE_ASSETS = [
   "js/search.js",
   "js/favorites.js",
   "js/history.js",
+  "js/settings.js",
+  "js/calc-history.js",
+  "js/converter-core.js",
   "js/measurement.js",
   "js/torque.js",
   "js/electrical.js",
+  "js/electrical-calc.js",
   "js/general.js",
+  "js/general-calc.js",
+  "js/calculator.js",
+  "js/tools.js",
+  "js/tool-compass.js",
+  "js/tool-timer.js",
+  "js/tool-level.js",
+  "js/tool-flashlight.js",
   "data/units.js",
   "data/aliases.js",
   "pages/measurement.html",
   "pages/torque.html",
   "pages/electrical.html",
   "pages/general.html",
+  "pages/tools.html",
+  "pages/calculator.html",
   "assets/icons/icon-72.png",
   "assets/icons/icon-96.png",
   "assets/icons/icon-128.png",

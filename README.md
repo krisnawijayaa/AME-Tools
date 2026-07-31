@@ -30,25 +30,38 @@ AME-Toolbox/
 │   ├── icons/                # PWA icons (72–512px + maskable)
 │   └── images/
 ├── css/
-│   ├── main.css              # Design system (dark theme, cards, components)
-│   └── responsive.css        # Breakpoints
+│   ├── main.css               # Design system + V2 additions (calculator, tools)
+│   └── responsive.css         # Breakpoints
 ├── js/
-│   ├── app.js                 # Home page controller
-│   ├── search.js              # Realtime multilingual search engine
-│   ├── favorites.js           # localStorage: favorites
-│   ├── history.js             # localStorage: recent tools
-│   ├── measurement.js         # Length/area/volume/weight/pressure/temp/speed/time/angle
-│   ├── torque.js              # Torque unit converter + extension calculator
-│   ├── electrical.js          # Voltage/current/resistance/power/frequency/capacitance
-│   └── general.js             # Decimal↔fraction, binary/decimal/hex/ASCII
+│   ├── app.js                  # Home page controller
+│   ├── search.js               # Realtime multilingual search + recent/popular searches
+│   ├── favorites.js            # localStorage: favorites
+│   ├── history.js              # localStorage: recent tools (max 20)
+│   ├── settings.js             # localStorage: generic key/value settings
+│   ├── calc-history.js         # localStorage: calculation history (max 20)
+│   ├── converter-core.js       # Shared realtime unit-converter engine (reused everywhere)
+│   ├── measurement.js          # Measurement page controller (12 unit types)
+│   ├── torque.js               # Torque: unit converter, extension/crowfoot/angle calc, lookup
+│   ├── electrical.js           # Electrical page controller (Converters/Calculators tabs)
+│   ├── electrical-calc.js      # Ohm's law, power, voltage drop, resistance, battery, AWG, wire R
+│   ├── general.js              # Dec/Frac, Number Base (+Octal)
+│   ├── general-calc.js         # Percentage, Ratio, Scientific Notation, Date Diff, Time
+│   ├── calculator.js           # Scientific calculator engine
+│   ├── tools.js                # Tools page controller
+│   ├── tool-compass.js         # Compass (device orientation)
+│   ├── tool-timer.js           # Stopwatch + Countdown Timer
+│   ├── tool-level.js           # Bubble Level + Protractor (device orientation)
+│   └── tool-flashlight.js      # Camera torch shortcut
 ├── data/
-│   ├── units.js               # All unit definitions & conversion factors
-│   └── aliases.js             # Search index (ID/EN keywords → tool)
+│   ├── units.js                # All unit definitions & conversion factors (20 types)
+│   └── aliases.js              # Search index (ID/EN keywords → tool) — 48 tools
 └── pages/
     ├── measurement.html
     ├── torque.html
     ├── electrical.html
-    └── general.html
+    ├── general.html
+    ├── calculator.html
+    └── tools.html
 ```
 
 ## 🚀 Deploy ke GitHub Pages
@@ -84,6 +97,25 @@ Struktur ini modular — setiap fitur punya file JS sendiri, sehingga menambah c
 - **Fastener**: referensi baut, ulir, torque spec standar.
 - **Aircraft Reference**: data referensi cepat (ATA chapter, dsb).
 - **Maintenance**: task tracking sederhana.
+- **Fastener Torque Lookup** (di dalam Torque): database referensi per ukuran & grade.
+
+## 🆕 V2 Changelog
+
+**Measurement** — ditambah Density, Flow Rate, Force, Energy (total 12 tipe).
+
+**Torque** — ditambah Crowfoot Calculator, Torque Angle Calculator, dan Fastener Torque Lookup (placeholder).
+
+**Electrical** — halaman kini punya 2 mode (Converters / Calculators). Calculators berisi 9 kalkulator: Ohm's Law, Power, Voltage Drop, Series/Parallel Resistance, Battery Capacity, Battery Runtime, AWG↔mm², Wire Resistance.
+
+**General** — ditambah Percentage, Ratio, Scientific Notation, Date Difference, Time Converter, dan Octal pada Number Base converter, plus link ke **Scientific Calculator** (halaman terpisah, `pages/calculator.html`) dengan trig/log/memory/ANS/parentheses dan history kalkulasi.
+
+**Tools (baru)** — kategori baru di Home berisi: Compass, Stopwatch, Timer, Bubble Level, Protractor/Angle Meter, dan Flashlight — semua memakai sensor perangkat (device orientation / camera torch) dengan fallback pesan "tidak didukung" jika sensor tidak tersedia.
+
+**Search** — kini menampilkan Recent Searches & Popular Searches saat search box kosong/fokus, selain hasil realtime seperti sebelumnya. 48 tool kini dapat dicari.
+
+**History & Favorites** — kapasitas Recent dinaikkan ke 20 item; ditambah `CalcHistory` khusus untuk menyimpan hasil kalkulasi (dipakai Scientific Calculator) dengan copy/delete/clear-all.
+
+**Refactor** — logic konversi unit realtime yang sebelumnya terduplikasi di `measurement.js`, `electrical.js`, dan `torque.js` kini terpusat di satu modul reusable: `js/converter-core.js`.
 
 ---
 
