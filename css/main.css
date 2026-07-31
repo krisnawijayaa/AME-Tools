@@ -706,3 +706,201 @@ button { font-family: inherit; }
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ========================================================
+   V2 additions — Scientific Calculator, Tools (Compass,
+   Stopwatch/Timer, Bubble Level, Protractor, Flashlight).
+   Reuses existing color tokens, radii, and transitions.
+   ======================================================== */
+
+/* ---------- Scientific Calculator ---------- */
+.calc-display {
+  text-align: right;
+}
+
+.calc-memory {
+  font-size: 12px;
+  color: var(--orange);
+  min-height: 16px;
+  text-align: left;
+}
+
+.calc-expr {
+  font-size: 34px;
+  font-weight: 800;
+  word-break: break-all;
+  min-height: 42px;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-display-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.calc-keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 0 16px 16px;
+}
+
+.calc-key {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 0;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.calc-key:active { transform: scale(0.94); background: var(--card-hover); }
+
+.calc-key-op { color: var(--blue); }
+.calc-key-fn { color: var(--purple); font-size: 13px; }
+.calc-key-eq { background: var(--blue); border-color: var(--blue); color: #fff; }
+.calc-key-danger { color: var(--orange); }
+
+/* ---------- Compass ---------- */
+.compass-dial {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-needle {
+  color: var(--blue);
+  transition: transform 120ms linear;
+}
+
+.compass-n {
+  position: absolute;
+  top: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--orange);
+}
+
+.compass-heading {
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.compass-direction {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+/* ---------- Stopwatch / Timer ---------- */
+.timer-display {
+  font-size: 40px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  margin: 14px 0;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.timer-controls .chip {
+  padding: 10px 20px;
+}
+
+/* ---------- Bubble Level ---------- */
+.level-frame {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  overflow: hidden;
+}
+
+.level-crosshair {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed var(--border);
+  border-radius: 50%;
+  margin: 20px;
+}
+
+.level-bubble {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: var(--blue-bg);
+  border: 2px solid var(--blue);
+  transition: transform 90ms linear, background var(--transition), border-color var(--transition);
+}
+
+.level-bubble.level-ok {
+  background: var(--green-bg);
+  border-color: var(--green);
+}
+
+/* ---------- Protractor ---------- */
+.protractor-dial {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  margin: 10px auto;
+  border-radius: 100px 100px 0 0;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-bottom: none;
+  overflow: hidden;
+}
+
+.protractor-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  height: 92px;
+  background: var(--purple);
+  transform-origin: bottom center;
+  transition: transform 90ms linear;
+}
+
+/* ---------- Flashlight ---------- */
+.flashlight-btn {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--border);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto 0;
+  transition: all var(--transition);
+}
+
+.flashlight-btn.active {
+  background: var(--orange-bg);
+  border-color: var(--orange);
+  color: var(--orange);
+}
