@@ -123,7 +123,75 @@ const Search = (() => {
     return matches.sort((a, b) => a.dist - b.dist).map((m) => m.entry);
   }
 
-  return { query };
+  /**
+   * Universal search: looks inside the reference JSON databases (ATA
+   * chapters, aviation acronyms, fastener torque table) for matches
+   * that the static TOOL_INDEX keywords wouldn't catch — e.g. "ATA 27"
+   * or a specific bolt designation like "AN4". Requires DataLoader.
+   * dataPrefix is "" on Home (root) and "pages/" is NOT used here since
+   * this always runs from the root-level Home page.
+   */
+  async function deepQuery(q) {
+    if (!window.DataLoader || !q || q.trim().length < 2) return [];
+    const query = normalize(q);
+    const results = [];
+
+    try {
+      const ata = await window.DataLoader.load("data/ata.json");
+      const digits = query.replace(/\D/g, "");
+      ata.chapters.forEach((c) => {
+        const matchesNumber = digits !== "" && c.chapter === digits.padStart(2, "0").slice(-2);
+        const matchesPhrase = normalize(`ata ${c.chapter}`).includes(query) || normalize(`ata${c.chapter}`).includes(query.replace(/\s/g, ""));
+        const matchesTitle = normalize(c.title).includes(query);
+        if (matchesNumber || matchesPhrase || matchesTitle) {
+          results.push({
+            id: `ata-${c.chapter}`,
+            title: `ATA ${c.chapter} — ${c.title}`,
+            subtitle: "ATA Chapter Reference",
+            icon: "book-open",
+            color: "blue",
+            url: `pages/aircraft.html?tool=ata`
+          });
+        }
+      });
+    } catch (e) { /* offline first-load: ignore */ }
+
+    try {
+      const acr = await window.DataLoader.load("data/acronyms.json");
+      acr.acronyms.forEach((a) => {
+        if (normalize(a.abbr) === query || normalize(a.abbr).includes(query) || normalize(a.meaning).includes(query)) {
+          results.push({
+            id: `acronym-${a.abbr}`,
+            title: `${a.abbr} — ${a.meaning}`,
+            subtitle: "Aviation Acronym Dictionary",
+            icon: "book-open",
+            color: "blue",
+            url: `pages/aircraft.html?tool=acronyms`
+          });
+        }
+      });
+    } catch (e) { /* ignore */ }
+
+    try {
+      const trq = await window.DataLoader.load("data/torque.json");
+      trq.bolts.forEach((b) => {
+        if (normalize(b.designation).includes(query) || normalize(b.series).includes(query)) {
+          results.push({
+            id: `torque-${b.id}`,
+            title: `${b.designation} Torque Spec`,
+            subtitle: `${b.torque_min}–${b.torque_max} ${trq.unit} · Fastener Torque Lookup`,
+            icon: "book-open",
+            color: "purple",
+            url: `pages/fastener.html?tool=torquelookup`
+          });
+        }
+      });
+    } catch (e) { /* ignore */ }
+
+    return results.slice(0, 6);
+  }
+
+  return { query, deepQuery };
 })();
 
 window.Search = Search;

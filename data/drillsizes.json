@@ -1,0 +1,23 @@
+{
+  "note": "Konversi ukuran mata bor Number/Letter/Fraction ke desimal inch. Referensi umum machinist handbook.",
+  "sizes": [
+    { "size": "#60", "decimal_in": 0.0400 }, { "size": "#50", "decimal_in": 0.0700 },
+    { "size": "#40", "decimal_in": 0.0980 }, { "size": "#36", "decimal_in": 0.1065 },
+    { "size": "#30", "decimal_in": 0.1285 }, { "size": "#29", "decimal_in": 0.1360 },
+    { "size": "#25", "decimal_in": 0.1495 }, { "size": "#21", "decimal_in": 0.1590 },
+    { "size": "#19", "decimal_in": 0.1660 }, { "size": "#11", "decimal_in": 0.1910 },
+    { "size": "#7",  "decimal_in": 0.2010 }, { "size": "#3",  "decimal_in": 0.2130 },
+    { "size": "A",   "decimal_in": 0.2340 }, { "size": "F",   "decimal_in": 0.2570 },
+    { "size": "I",   "decimal_in": 0.2720 }, { "size": "P",   "decimal_in": 0.3230 },
+    { "size": "Q",   "decimal_in": 0.3320 }, { "size": "U",   "decimal_in": 0.3680 },
+    { "size": "1/16", "decimal_in": 0.0625 }, { "size": "5/64", "decimal_in": 0.0781 },
+    { "size": "3/32", "decimal_in": 0.0938 }, { "size": "1/8",  "decimal_in": 0.1250 },
+    { "size": "5/32", "decimal_in": 0.1563 }, { "size": "3/16", "decimal_in": 0.1875 },
+    { "size": "13/64", "decimal_in": 0.2031 }, { "size": "7/32", "decimal_in": 0.2188 },
+    { "size": "1/4",  "decimal_in": 0.2500 }, { "size": "17/64", "decimal_in": 0.2656 },
+    { "size": "9/32", "decimal_in": 0.2813 }, { "size": "5/16", "decimal_in": 0.3125 },
+    { "size": "25/64", "decimal_in": 0.3906 }, { "size": "27/64", "decimal_in": 0.4219 },
+    { "size": "29/64", "decimal_in": 0.4531 }, { "size": "3/8",  "decimal_in": 0.3750 },
+    { "size": "7/16", "decimal_in": 0.4375 }, { "size": "1/2",  "decimal_in": 0.5000 }
+  ]
+}

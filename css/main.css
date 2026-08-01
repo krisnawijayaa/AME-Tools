@@ -1149,3 +1149,83 @@ button, .chip, .fav-btn, .nav-item, .back-btn {
 .suggestion-empty[role="status"] {
   text-align: center;
 }
+
+/* ========================================================
+   V3.1 additions — Fastener/Aircraft/Maintenance reference
+   pages (data rows, disclaimers), search keyboard nav.
+   ======================================================== */
+
+/* ---------- Search: keyboard-navigated active item ---------- */
+.suggestion-item.kbd-active {
+  background: var(--card-hover);
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+/* ---------- Disclaimer banner (fastener/torque reference data) ---------- */
+.disclaimer-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--orange-bg);
+  color: var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.disclaimer-box svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ---------- Data row (reference database results) ---------- */
+.data-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.data-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.data-row-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.data-row-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--purple-bg);
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.data-row-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;
+  font-size: 13px;
+}
+
+.data-row-grid .data-label {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.data-row-ref {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-faint);
+  font-style: italic;
+}

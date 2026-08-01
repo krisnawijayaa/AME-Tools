@@ -166,6 +166,38 @@ const TOOL_INFO = {
     example: "sin(30) pada mode DEG = 0.5.",
     commonUses: "Perhitungan cepat di lapangan tanpa berpindah aplikasi.",
     tips: "Gunakan tombol ANS untuk melanjutkan dari hasil sebelumnya, dan MC/MR/M+/M- untuk menyimpan nilai sementara."
+  },
+  "standard-atmosphere": {
+    title: "Standard Atmosphere (ISA)",
+    description: "Model atmosfer standar internasional (ISA) yang mendefinisikan suhu dan tekanan referensi pada setiap ketinggian, dipakai sebagai baseline performa pesawat dan instrumen.",
+    formula: "T(alt) = 15°C − 1.98°C × (alt_ft / 1000)  [troposfer]",
+    example: "Pada 10,000 ft, ISA ≈ -4.8°C.",
+    commonUses: "Baseline performa engine/airframe, kalibrasi instrumen, perencanaan penerbangan.",
+    tips: "Model ini berlaku hingga tropopause (~36,089 ft); di atas itu suhu ISA dianggap konstan."
+  },
+  "isa-temperature": {
+    title: "ISA Temperature Calculator",
+    description: "Menghitung suhu standar ISA pada ketinggian tertentu, dan membandingkannya dengan OAT aktual untuk mendapatkan deviasi ISA (ISA+/-).",
+    formula: "ISA(°C) = 15 − 1.98 × (alt_ft / 1000)  •  Deviation = OAT − ISA",
+    example: "10,000 ft, OAT aktual -2°C → ISA -4.8°C, deviasi ISA +2.8.",
+    commonUses: "Perhitungan performa takeoff/landing, density altitude, briefing cuaca.",
+    tips: "Deviasi ISA positif besar mengindikasikan udara lebih panas dari standar → performa engine/airframe menurun."
+  },
+  "pressure-altitude": {
+    title: "Pressure Altitude Calculator",
+    description: "Ketinggian yang terbaca altimeter saat di-set ke 29.92 inHg (standard datum), dipakai sebagai basis perhitungan density altitude & performa.",
+    formula: "PA = Field Elevation + (29.92 − Altimeter Setting) × 1000",
+    example: "Elevasi 1,500 ft, altimeter setting 29.72 → PA = 1,500 + (0.20×1000) = 1,700 ft.",
+    commonUses: "Perhitungan performa takeoff/landing, flight planning di atas transition altitude.",
+    tips: "Selisih 0.01 inHg dari 29.92 setara dengan sekitar 10 ft perubahan pressure altitude."
+  },
+  "inspection-interval": {
+    title: "Inspection Interval Calculator",
+    description: "Menghitung tanggal jatuh tempo inspeksi berikutnya berdasarkan tanggal terakhir inspeksi dan interval waktu yang ditentukan.",
+    formula: "Next Due = Last Inspection Date + Interval (days)",
+    example: "Inspeksi terakhir 1 Jan, interval 90 hari → jatuh tempo 1 April.",
+    commonUses: "Melacak due date inspeksi berkala, kalibrasi alat ukur, penggantian komponen life-limited berbasis waktu.",
+    tips: "Untuk interval berbasis flight hours/cycles, catat secara terpisah — kalkulator ini hanya menghitung interval kalender."
   }
 };
 

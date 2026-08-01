@@ -264,11 +264,128 @@ const TOOL_INDEX = [
   {
     id: "torque-lookup",
     title: "Fastener Torque Lookup",
-    subtitle: "Reference table by size & grade (Coming Soon)",
+    subtitle: "AN/MS/NAS bolt torque reference database",
     icon: "book-open",
+    color: "purple",
+    url: "pages/fastener.html?tool=torquelookup",
+    keywords: ["fastener torque", "torque spec", "torque lookup", "bolt torque table", "tabel torsi baut", "an3", "an4", "an5", "an6", "an7", "an8", "ms bolt", "nas bolt"]
+  },
+  {
+    id: "thread-chart",
+    title: "Thread Chart",
+    subtitle: "UNC/UNF major diameter, TPI, tap drill",
+    icon: "cog",
+    color: "purple",
+    url: "pages/fastener.html?tool=threadchart",
+    keywords: ["thread chart", "unc", "unf", "tap drill", "ulir baut", "thread pitch"]
+  },
+  {
+    id: "drill-size-reference",
+    title: "Drill Size Reference",
+    subtitle: "Number/letter/fraction drill to decimal inch",
+    icon: "circle-dot",
+    color: "purple",
+    url: "pages/fastener.html?tool=drillsize",
+    keywords: ["drill size", "ukuran mata bor", "drill bit chart", "number drill", "letter drill"]
+  },
+  {
+    id: "rivet-guide",
+    title: "Rivet Guide",
+    subtitle: "AN470 / MS20426 diameter, head type, drill",
+    icon: "circle-dot",
+    color: "purple",
+    url: "pages/fastener.html?tool=rivets",
+    keywords: ["rivet", "rivet guide", "an470", "ms20426", "paku keling", "solid rivet"]
+  },
+  {
+    id: "bolt-grade",
+    title: "Bolt Grade Identification",
+    subtitle: "SAE/metric head marking reference",
+    icon: "cog",
+    color: "purple",
+    url: "pages/fastener.html?tool=boltgrade",
+    keywords: ["bolt grade", "grade baut", "sae grade 5", "sae grade 8", "metric class 8.8", "bolt marking"]
+  },
+  {
+    id: "ata-chapters",
+    title: "ATA Chapter Reference",
+    subtitle: "ATA iSpec 2200 chapter numbering",
+    icon: "book-open",
+    color: "blue",
+    url: "pages/aircraft.html?tool=ata",
+    keywords: ["ata", "ata chapter", "ata 27", "ata 32", "flight controls", "landing gear chapter", "manual chapter"]
+  },
+  {
+    id: "aviation-acronyms",
+    title: "Aviation Acronym Dictionary",
+    subtitle: "Common AMT/maintenance abbreviations",
+    icon: "book-open",
+    color: "blue",
+    url: "pages/aircraft.html?tool=acronyms",
+    keywords: ["acronym", "singkatan", "mel", "aog", "ndt", "amm", "ipc", "srm", "aviation abbreviation"]
+  },
+  {
+    id: "standard-atmosphere",
+    title: "Standard Atmosphere (ISA)",
+    subtitle: "ISA temperature & pressure ratio table",
+    icon: "cloud",
+    color: "blue",
+    url: "pages/aircraft.html?tool=stdatm",
+    keywords: ["standard atmosphere", "isa", "atmosfer standar", "tropopause"]
+  },
+  {
+    id: "isa-temperature",
+    title: "ISA Temperature Calculator",
+    subtitle: "Standard temperature & ISA deviation by altitude",
+    icon: "thermometer",
+    color: "blue",
+    url: "pages/aircraft.html?tool=isatemp",
+    keywords: ["isa temperature", "isa deviation", "suhu isa", "oat"]
+  },
+  {
+    id: "pressure-altitude",
+    title: "Pressure Altitude Calculator",
+    subtitle: "Field elevation + altimeter setting",
+    icon: "gauge",
+    color: "blue",
+    url: "pages/aircraft.html?tool=pressurealt",
+    keywords: ["pressure altitude", "altimeter setting", "density altitude", "29.92"]
+  },
+  {
+    id: "task-checklist",
+    title: "Task Checklist",
+    subtitle: "Simple local checklist for your shift/job",
+    icon: "clipboard-list",
     color: "orange",
-    url: "pages/torque.html?tab=lookup",
-    keywords: ["fastener torque", "torque spec", "torque lookup", "bolt torque table", "tabel torsi baut"]
+    url: "pages/maintenance.html?tool=checklist",
+    keywords: ["checklist", "task checklist", "to-do", "daftar tugas"]
+  },
+  {
+    id: "shift-notes",
+    title: "Shift Notes",
+    subtitle: "Timestamped shift handover notes",
+    icon: "sticky-note",
+    color: "orange",
+    url: "pages/maintenance.html?tool=shiftnotes",
+    keywords: ["shift notes", "catatan shift", "handover notes", "log book"]
+  },
+  {
+    id: "job-timer",
+    title: "Job Timer",
+    subtitle: "Stopwatch for tracking job duration",
+    icon: "timer",
+    color: "orange",
+    url: "pages/maintenance.html?tool=jobtimer",
+    keywords: ["job timer", "waktu kerja", "stopwatch pekerjaan"]
+  },
+  {
+    id: "inspection-interval",
+    title: "Inspection Interval Calculator",
+    subtitle: "Next due date from last inspection + interval",
+    icon: "calendar-days",
+    color: "orange",
+    url: "pages/maintenance.html?tool=interval",
+    keywords: ["inspection interval", "interval inspeksi", "due date", "jatuh tempo inspeksi", "calendar inspection"]
   },
 
   // ===== V2: Electrical Calculators =====

@@ -24,6 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
 });
 
+window.addEventListener("popstate", () => {
+  const requested = new URLSearchParams(window.location.search).get("type");
+  currentType = MEASUREMENT_TYPES.includes(requested) ? requested : "length";
+  document.querySelectorAll("#typeSelector .type-pill").forEach((b) => b.classList.toggle("active", b.dataset.type === currentType));
+  renderConverter(currentType);
+});
+
 function renderTypeSelector() {
   const wrap = document.getElementById("typeSelector");
   wrap.innerHTML = MEASUREMENT_TYPES.map((type) => {
@@ -34,7 +41,7 @@ function renderTypeSelector() {
   wrap.querySelectorAll(".type-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       currentType = btn.dataset.type;
-      history.replaceState(null, "", `?type=${currentType}`);
+      history.pushState(null, "", `?type=${currentType}`);
       window.History.add(currentType);
       wrap.querySelectorAll(".type-pill").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");

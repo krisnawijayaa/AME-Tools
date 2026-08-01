@@ -1,0 +1,12 @@
+{
+  "note": "Identifikasi umum kepala baut/marking grade. Untuk fastener aviation (AN/NAS/MS), gunakan part number — marking grade SAE/metric di bawah ini untuk referensi hardware umum bengkel.",
+  "grades": [
+    { "marking": "No marks", "standard": "SAE Grade 2", "material": "Low/medium carbon steel", "min_tensile_psi": 74000 },
+    { "marking": "3 radial lines", "standard": "SAE Grade 5", "material": "Medium carbon steel, Q&T", "min_tensile_psi": 120000 },
+    { "marking": "6 radial lines", "standard": "SAE Grade 8", "material": "Medium carbon alloy steel, Q&T", "min_tensile_psi": 150000 },
+    { "marking": "4.6", "standard": "Metric Class 4.6", "material": "Low carbon steel", "min_tensile_psi": 58000 },
+    { "marking": "8.8", "standard": "Metric Class 8.8", "material": "Medium carbon steel, Q&T", "min_tensile_psi": 120000 },
+    { "marking": "10.9", "standard": "Metric Class 10.9", "material": "Alloy steel, Q&T", "min_tensile_psi": 150000 },
+    { "marking": "12.9", "standard": "Metric Class 12.9", "material": "Alloy steel, Q&T", "min_tensile_psi": 176000 }
+  ]
+}

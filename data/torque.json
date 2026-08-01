@@ -1,0 +1,20 @@
+{
+  "disclaimer": "Nilai pada database ini adalah REFERENSI UMUM (typical range) berdasarkan literatur AMT/A&P yang umum dipublikasikan (mis. AC43.13-1B). SELALU verifikasi torque value final terhadap Maintenance Manual, IPC, atau Engineering Order pesawat/komponen yang bersangkutan sebelum digunakan untuk pekerjaan aktual.",
+  "unit": "in-lb",
+  "bolts": [
+    { "id": "an3", "series": "AN", "designation": "AN3", "diameter_in": "0.190 (10-32)", "threads_per_inch": 32, "material": "Cadmium-plated steel", "torque_min": 20, "torque_max": 25, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "an4", "series": "AN", "designation": "AN4", "diameter_in": "0.250 (1/4-28)", "threads_per_inch": 28, "material": "Cadmium-plated steel", "torque_min": 50, "torque_max": 70, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "an5", "series": "AN", "designation": "AN5", "diameter_in": "0.3125 (5/16-24)", "threads_per_inch": 24, "material": "Cadmium-plated steel", "torque_min": 100, "torque_max": 140, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "an6", "series": "AN", "designation": "AN6", "diameter_in": "0.375 (3/8-24)", "threads_per_inch": 24, "material": "Cadmium-plated steel", "torque_min": 160, "torque_max": 190, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "an7", "series": "AN", "designation": "AN7", "diameter_in": "0.4375 (7/16-20)", "threads_per_inch": 20, "material": "Cadmium-plated steel", "torque_min": 450, "torque_max": 500, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "an8", "series": "AN", "designation": "AN8", "diameter_in": "0.500 (1/2-20)", "threads_per_inch": 20, "material": "Cadmium-plated steel", "torque_min": 480, "torque_max": 690, "reference": "AC43.13-1B Ch.7 (typical)" },
+    { "id": "ms3", "series": "MS", "designation": "MS20003-3 / MS21042-3", "diameter_in": "0.190 (10-32)", "threads_per_inch": 32, "material": "Steel, self-locking nut", "torque_min": 12, "torque_max": 15, "reference": "Typical MS self-locking nut range" },
+    { "id": "ms4", "series": "MS", "designation": "MS20003-4 / MS21042-4", "diameter_in": "0.250 (1/4-28)", "threads_per_inch": 28, "material": "Steel, self-locking nut", "torque_min": 30, "torque_max": 40, "reference": "Typical MS self-locking nut range" },
+    { "id": "ms5", "series": "MS", "designation": "MS20003-5 / MS21042-5", "diameter_in": "0.3125 (5/16-24)", "threads_per_inch": 24, "material": "Steel, self-locking nut", "torque_min": 40, "torque_max": 65, "reference": "Typical MS self-locking nut range" },
+    { "id": "ms6", "series": "MS", "designation": "MS20003-6 / MS21042-6", "diameter_in": "0.375 (3/8-24)", "threads_per_inch": 24, "material": "Steel, self-locking nut", "torque_min": 80, "torque_max": 110, "reference": "Typical MS self-locking nut range" },
+    { "id": "nas3", "series": "NAS", "designation": "NAS1303-3", "diameter_in": "0.190 (10-32)", "threads_per_inch": 32, "material": "Corrosion-resistant steel", "torque_min": 20, "torque_max": 25, "reference": "Typical NAS close-tolerance bolt range" },
+    { "id": "nas4", "series": "NAS", "designation": "NAS1303-4", "diameter_in": "0.250 (1/4-28)", "threads_per_inch": 28, "material": "Corrosion-resistant steel", "torque_min": 50, "torque_max": 70, "reference": "Typical NAS close-tolerance bolt range" },
+    { "id": "nas5", "series": "NAS", "designation": "NAS1303-5", "diameter_in": "0.3125 (5/16-24)", "threads_per_inch": 24, "material": "Corrosion-resistant steel", "torque_min": 100, "torque_max": 140, "reference": "Typical NAS close-tolerance bolt range" },
+    { "id": "nas6", "series": "NAS", "designation": "NAS1303-6", "diameter_in": "0.375 (3/8-24)", "threads_per_inch": 24, "material": "Corrosion-resistant steel", "torque_min": 160, "torque_max": 190, "reference": "Typical NAS close-tolerance bolt range" }
+  ]
+}

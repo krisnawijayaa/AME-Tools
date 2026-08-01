@@ -27,13 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
   showTool(activeTool);
 });
 
+window.addEventListener("popstate", () => {
+  const requested = new URLSearchParams(window.location.search).get("tool");
+  activeTool = TOOL_ITEMS.some((t) => t.id === requested) ? requested : "compass";
+  document.querySelectorAll("#typeSelector .type-pill").forEach((b) => b.classList.toggle("active", b.dataset.tool === activeTool));
+  showTool(activeTool);
+});
+
 function renderNav() {
   const nav = document.getElementById("typeSelector");
   nav.innerHTML = TOOL_ITEMS.map((t) => `<button class="type-pill ${t.id === activeTool ? "active" : ""}" data-tool="${t.id}">${t.label}</button>`).join("");
   nav.querySelectorAll(".type-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       activeTool = btn.dataset.tool;
-      history.replaceState(null, "", `?tool=${activeTool}`);
+      history.pushState(null, "", `?tool=${activeTool}`);
       window.History.add(activeTool);
       nav.querySelectorAll(".type-pill").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");

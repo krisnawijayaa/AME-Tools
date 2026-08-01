@@ -4,7 +4,7 @@
  * Bump CACHE_VERSION whenever any cached file changes so old caches get purged.
  */
 
-const CACHE_VERSION = "ame-toolbox-v3";
+const CACHE_VERSION = "ame-toolbox-v4";
 const SCOPE = self.registration.scope; // works correctly under GitHub Pages subpaths too
 
 // Build absolute URLs relative to the service worker's registration scope
@@ -29,6 +29,8 @@ const CORE_ASSETS = [
   "js/calc-history.js",
   "js/converter-core.js",
   "js/tool-info.js",
+  "js/data-loader.js",
+  "js/ui-components.js",
   "js/measurement.js",
   "js/torque.js",
   "js/electrical.js",
@@ -41,9 +43,20 @@ const CORE_ASSETS = [
   "js/tool-timer.js",
   "js/tool-level.js",
   "js/tool-flashlight.js",
+  "js/fastener.js",
+  "js/aircraft.js",
+  "js/maintenance.js",
+  "js/maintenance-data.js",
   "data/units.js",
   "data/aliases.js",
   "data/tool-info.js",
+  "data/ata.json",
+  "data/acronyms.json",
+  "data/torque.json",
+  "data/threadchart.json",
+  "data/drillsizes.json",
+  "data/rivets.json",
+  "data/boltgrades.json",
   "pages/measurement.html",
   "pages/torque.html",
   "pages/electrical.html",
@@ -52,6 +65,9 @@ const CORE_ASSETS = [
   "pages/calculator.html",
   "pages/settings.html",
   "pages/about.html",
+  "pages/fastener.html",
+  "pages/aircraft.html",
+  "pages/maintenance.html",
   "assets/icons/icon-72.png",
   "assets/icons/icon-96.png",
   "assets/icons/icon-128.png",
@@ -93,6 +109,25 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
+
+  // Reference databases (data/*.json): stale-while-revalidate, so the
+  // app responds instantly from cache but silently refreshes in the
+  // background whenever online, without blocking the UI.
+  if (req.url.endsWith(".json") && req.url.includes("/data/")) {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        const networkFetch = fetch(req).then((res) => {
+          if (res && res.status === 200) {
+            const resClone = res.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(req, resClone));
+          }
+          return res;
+        }).catch(() => cached);
+        return cached || networkFetch;
+      })
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(req).then((cached) => {

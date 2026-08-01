@@ -139,6 +139,24 @@ Struktur ini modular — setiap fitur punya file JS sendiri, sehingga menambah c
 
 **Code quality** — extracted the duplicated toast/snackbar logic into a single shared `js/toast.js` used by every page; added a lightweight shared `js/ripple.js` for button feedback that respects the Animations setting.
 
+## 🆕 V3.1 Changelog — Full Categories & Deep Linking
+
+**Deep Linking** — every sub-tool switch (`?type=`, `?tab=`, `?tool=`) now uses `history.pushState` + `popstate` listeners across Measurement, Torque, Electrical, General, and Tools. Refresh restores exact state; Browser Back/Forward now steps through in-page tool history correctly.
+
+**Fastener** (`pages/fastener.html`) — Torque Lookup (AN/MS/NAS database with a "verify against the official manual" disclaimer), Thread Chart (UNC/UNF), Drill Size Reference, Rivet Guide, Bolt Grade Identification.
+
+**Aircraft** (`pages/aircraft.html`) — ATA Chapter Reference, Aviation Acronym Dictionary, Standard Atmosphere table, ISA Temperature Calculator, Pressure Altitude Calculator.
+
+**Maintenance** (`pages/maintenance.html`) — Task Checklist, Shift Notes, Job Timer (reuses the existing Stopwatch component), Inspection Interval Calculator.
+
+**Offline database architecture** — new reference data lives in `data/ata.json`, `acronyms.json`, `torque.json`, `threadchart.json`, `drillsizes.json`, `rivets.json`, `boltgrades.json` — fetched via `js/data-loader.js`, not hardcoded in JS.
+
+**Universal Search** — `search.js` now also searches inside the ATA/acronyms/torque databases (e.g. "AN4", "ATA 27") via an async `deepQuery()`, merged with the existing keyword index. Added keyboard navigation (Arrow keys/Enter/Escape) to search suggestions.
+
+**Reusable components** — `js/ui-components.js` extracts ToolCard/ToolRow/EmptyState/FavoriteButton patterns shared by Home and the new reference pages.
+
+**PWA** — service worker bumped to v4, precaches every new page/script/JSON file; reference databases use a stale-while-revalidate strategy (instant from cache, refreshed in the background when online).
+
 ---
 
 Dibuat untuk komunitas AME — kontribusi & masukan sangat terbuka.

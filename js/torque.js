@@ -37,13 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
 });
 
+window.addEventListener("popstate", () => {
+  const requested = new URLSearchParams(window.location.search).get("tab");
+  activeTab = TORQUE_TABS.some((t) => t.id === requested) ? requested : "unit";
+  document.querySelectorAll("#tabs .type-pill").forEach((b) => b.classList.toggle("active", b.dataset.tab === activeTab));
+  switchTab(activeTab);
+});
+
 function renderTabs() {
   const tabs = document.getElementById("tabs");
   tabs.innerHTML = TORQUE_TABS.map((t) => `<button class="type-pill ${t.id === activeTab ? "active" : ""}" data-tab="${t.id}">${t.label}</button>`).join("");
   tabs.querySelectorAll(".type-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       activeTab = btn.dataset.tab;
-      history.replaceState(null, "", `?tab=${activeTab}`);
+      history.pushState(null, "", `?tab=${activeTab}`);
       const idMap = { unit: "torque-unit", extension: "torque-extension", crowfoot: "torque-crowfoot", angle: "torque-angle", lookup: "torque-lookup" };
       window.History.add(idMap[activeTab]);
       switchTab(activeTab);
@@ -210,7 +217,7 @@ function calcAngle() {
   resultEl.textContent = `Snug to ${window.ConverterCore.formatNumber(torque)} ${unit}, then rotate an additional ${window.ConverterCore.formatNumber(degrees)}°${perStep}.`;
 }
 
-/* ---------------- Tab 5: Fastener Torque Lookup (placeholder) ---------------- */
+/* ---------------- Tab 5: Fastener Torque Lookup (now implemented under Fastener) ---------------- */
 function renderFastenerLookup() {
   const panel = document.getElementById("lookupPanel");
   panel.innerHTML = `
@@ -219,7 +226,9 @@ function renderFastenerLookup() {
         <i data-lucide="book-open" style="width:22px;height:22px"></i>
       </div>
       <h3>Fastener Torque Lookup</h3>
-      <p class="hint">Database referensi torque spec per ukuran &amp; grade fastener sedang disiapkan.</p>
-      <span class="badge-soon" style="position:static;display:inline-block;">Coming Soon</span>
+      <p class="hint">Database referensi torque spec berdasarkan AN/MS/NAS designation kini tersedia di kategori Fastener.</p>
+      <a class="chip" href="fastener.html?tool=torquelookup" style="display:inline-flex;margin-top:6px;">
+        <i data-lucide="search" style="width:14px;height:14px"></i> Open Torque Lookup
+      </a>
     </div>`;
 }

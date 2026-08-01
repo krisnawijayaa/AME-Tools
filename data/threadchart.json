@@ -1,0 +1,20 @@
+{
+  "note": "Ukuran umum UNC/UNF yang sering dipakai di industri pesawat. Selalu cek drawing/spec resmi untuk toleransi presisi.",
+  "threads": [
+    { "size": "#4-40 UNC", "major_dia_in": 0.112, "tpi": 40, "tap_drill": "#43" },
+    { "size": "#6-32 UNC", "major_dia_in": 0.138, "tpi": 32, "tap_drill": "#36" },
+    { "size": "#8-32 UNC", "major_dia_in": 0.164, "tpi": 32, "tap_drill": "#29" },
+    { "size": "#10-24 UNC", "major_dia_in": 0.190, "tpi": 24, "tap_drill": "#25" },
+    { "size": "#10-32 UNF", "major_dia_in": 0.190, "tpi": 32, "tap_drill": "#21" },
+    { "size": "1/4-20 UNC", "major_dia_in": 0.250, "tpi": 20, "tap_drill": "#7" },
+    { "size": "1/4-28 UNF", "major_dia_in": 0.250, "tpi": 28, "tap_drill": "#3" },
+    { "size": "5/16-18 UNC", "major_dia_in": 0.3125, "tpi": 18, "tap_drill": "F" },
+    { "size": "5/16-24 UNF", "major_dia_in": 0.3125, "tpi": 24, "tap_drill": "I" },
+    { "size": "3/8-16 UNC", "major_dia_in": 0.375, "tpi": 16, "tap_drill": "5/16" },
+    { "size": "3/8-24 UNF", "major_dia_in": 0.375, "tpi": 24, "tap_drill": "Q" },
+    { "size": "7/16-14 UNC", "major_dia_in": 0.4375, "tpi": 14, "tap_drill": "U" },
+    { "size": "7/16-20 UNF", "major_dia_in": 0.4375, "tpi": 20, "tap_drill": "25/64" },
+    { "size": "1/2-13 UNC", "major_dia_in": 0.500, "tpi": 13, "tap_drill": "27/64" },
+    { "size": "1/2-20 UNF", "major_dia_in": 0.500, "tpi": 20, "tap_drill": "29/64" }
+  ]
+}

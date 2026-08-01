@@ -1,0 +1,12 @@
+{
+  "note": "Panduan umum pemilihan rivet solid AN/MS berdasarkan ketebalan material. Ikuti structural repair manual (SRM) untuk aplikasi struktural.",
+  "rivets": [
+    { "type": "AN470AD3", "diameter_in": "3/32", "head": "Universal (protruding)", "material": "2117-T4 (AD)", "grip_range_in": "up to 3/16 total thickness", "typical_hole_drill": "#40" },
+    { "type": "AN470AD4", "diameter_in": "1/8", "head": "Universal (protruding)", "material": "2117-T4 (AD)", "grip_range_in": "up to 1/4 total thickness", "typical_hole_drill": "#30" },
+    { "type": "AN470AD5", "diameter_in": "5/32", "head": "Universal (protruding)", "material": "2117-T4 (AD)", "grip_range_in": "up to 5/16 total thickness", "typical_hole_drill": "#21" },
+    { "type": "AN470AD6", "diameter_in": "3/16", "head": "Universal (protruding)", "material": "2117-T4 (AD)", "grip_range_in": "up to 3/8 total thickness", "typical_hole_drill": "#11" },
+    { "type": "MS20426AD3", "diameter_in": "3/32", "head": "100° countersunk (flush)", "material": "2117-T4 (AD)", "grip_range_in": "up to 3/16 total thickness", "typical_hole_drill": "#40" },
+    { "type": "MS20426AD4", "diameter_in": "1/8", "head": "100° countersunk (flush)", "material": "2117-T4 (AD)", "grip_range_in": "up to 1/4 total thickness", "typical_hole_drill": "#30" },
+    { "type": "MS20426AD5", "diameter_in": "5/32", "head": "100° countersunk (flush)", "material": "2117-T4 (AD)", "grip_range_in": "up to 5/16 total thickness", "typical_hole_drill": "#21" }
+  ]
+}

@@ -29,6 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
 });
 
+window.addEventListener("popstate", () => {
+  const params = new URLSearchParams(window.location.search);
+  const requestedType = params.get("type");
+  const requestedMode = params.get("mode");
+  currentElecType = ELECTRICAL_TYPES.includes(requestedType) ? requestedType : "voltage";
+  elecMode = requestedMode === "calc" ? "calc" : "converters";
+  document.querySelectorAll("#modeTabs .tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.mode === elecMode));
+  document.querySelectorAll("#typeSelector .type-pill").forEach((b) => b.classList.toggle("active", b.dataset.type === currentElecType));
+  renderElecConverter(currentElecType);
+  switchMode(elecMode);
+});
+
 function renderModeTabs() {
   const tabs = document.getElementById("modeTabs");
   if (!tabs) return;
@@ -39,7 +51,7 @@ function renderModeTabs() {
   tabs.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       elecMode = btn.dataset.mode;
-      history.replaceState(null, "", `?mode=${elecMode}`);
+      history.pushState(null, "", `?mode=${elecMode}`);
       window.History.add(elecMode === "calc" ? "ohms-law" : currentElecType);
       switchMode(elecMode);
     });
@@ -62,7 +74,7 @@ function renderElecTypeSelector() {
   wrap.querySelectorAll(".type-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       currentElecType = btn.dataset.type;
-      history.replaceState(null, "", `?type=${currentElecType}`);
+      history.pushState(null, "", `?type=${currentElecType}`);
       window.History.add(currentElecType);
       wrap.querySelectorAll(".type-pill").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");

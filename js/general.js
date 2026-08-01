@@ -36,6 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
 });
 
+window.addEventListener("popstate", () => {
+  const requested = new URLSearchParams(window.location.search).get("tab");
+  activeGeneralTab = GENERAL_TOOLS.some((t) => t.id === requested) ? requested : "dec2frac";
+  document.querySelectorAll("#tabs .type-pill").forEach((b) => b.classList.toggle("active", b.dataset.tab === activeGeneralTab));
+  switchGeneralTab(activeGeneralTab);
+});
+
 function logHistory(tabId) {
   const tool = GENERAL_TOOLS.find((t) => t.id === tabId);
   if (tool) window.History.add(tool.toolId);
@@ -47,7 +54,7 @@ function renderTabs() {
   tabs.querySelectorAll(".type-pill").forEach((btn) => {
     btn.addEventListener("click", () => {
       activeGeneralTab = btn.dataset.tab;
-      history.replaceState(null, "", `?tab=${activeGeneralTab}`);
+      history.pushState(null, "", `?tab=${activeGeneralTab}`);
       logHistory(activeGeneralTab);
       switchGeneralTab(activeGeneralTab);
     });

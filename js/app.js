@@ -8,11 +8,11 @@ const CATEGORIES = [
   { id: "measurement", name: "Measurement", nameId: "Pengukuran", icon: "ruler", color: "blue", url: "pages/measurement.html", desc: "Length, area, volume & more" },
   { id: "torque", name: "Torque", nameId: "Torsi", icon: "wrench", color: "orange", url: "pages/torque.html", desc: "Unit & extension calculator" },
   { id: "electrical", name: "Electrical", nameId: "Elektrik", icon: "zap", color: "green", url: "pages/electrical.html", desc: "Voltage, current, power" },
-  { id: "fastener", name: "Fastener", nameId: "Fastener", icon: "cog", color: "purple", url: "#", comingSoon: true, desc: "Bolts, threads & specs" },
-  { id: "aircraft", name: "Aircraft", nameId: "Pesawat", icon: "plane", color: "blue", url: "#", comingSoon: true, desc: "Quick reference data" },
+  { id: "fastener", name: "Fastener", nameId: "Fastener", icon: "cog", color: "purple", url: "pages/fastener.html", desc: "Thread, drill, rivet, torque" },
+  { id: "aircraft", name: "Aircraft", nameId: "Pesawat", icon: "plane", color: "blue", url: "pages/aircraft.html", desc: "ATA, acronyms, atmosphere" },
   { id: "general", name: "General", nameId: "Umum", icon: "calculator", color: "purple", url: "pages/general.html", desc: "Fraction, binary, hex" },
   { id: "tools", name: "Tools", nameId: "Alat", icon: "compass", color: "green", url: "pages/tools.html", desc: "Compass, stopwatch, level" },
-  { id: "maintenance", name: "Maintenance", nameId: "Perawatan", icon: "calendar", color: "orange", url: "#", comingSoon: true, desc: "Task tracking (soon)" }
+  { id: "maintenance", name: "Maintenance", nameId: "Perawatan", icon: "calendar", color: "orange", url: "pages/maintenance.html", desc: "Checklist, notes, job timer" }
 ];
 
 // Tools promoted on Home as "Popular" (curated, most-used by AMEs)
@@ -170,14 +170,28 @@ function initSearch() {
 
     const results = window.Search.query(q);
     suggestBox.classList.remove("hidden");
+    renderResults(results, q);
 
+    // Universal search: also look inside ATA/acronyms/fastener databases
+    // and append any matches not already covered by the static index.
+    if (window.Search.deepQuery) {
+      window.Search.deepQuery(q).then((deep) => {
+        if (input.value !== q) return; // query changed while we were fetching
+        const existingTitles = new Set(results.map((r) => r.title));
+        const extra = deep.filter((d) => !existingTitles.has(d.title));
+        if (extra.length > 0) renderResults([...results, ...extra], q);
+      }).catch(() => {});
+    }
+  }
+
+  function renderResults(results, q) {
     if (results.length === 0) {
-      suggestBox.innerHTML = `<div class="suggestion-empty">No results for "${escapeHtml(q)}"</div>`;
+      suggestBox.innerHTML = `<div class="suggestion-empty" role="status">No results for "${escapeHtml(q)}"</div>`;
       return;
     }
 
-    suggestBox.innerHTML = results.slice(0, 8).map((t) => `
-      <a class="suggestion-item" href="${t.url}" data-search-pick="${t.id}">
+    suggestBox.innerHTML = results.slice(0, 10).map((t) => `
+      <a class="suggestion-item" href="${t.url}" data-search-pick="${t.id}" role="option">
         <div class="suggestion-icon accent-${t.color}">${iconSvg(t.icon, 18)}</div>
         <div class="suggestion-text">
           <span class="t">${t.title}</span>
@@ -187,7 +201,9 @@ function initSearch() {
     `).join("");
     suggestBox.querySelectorAll("[data-search-pick]").forEach((el) => {
       el.addEventListener("click", () => {
-        History.add(el.dataset.searchPick);
+        if (!el.dataset.searchPick.startsWith("ata-") && !el.dataset.searchPick.startsWith("acronym-") && !el.dataset.searchPick.startsWith("torque-")) {
+          History.add(el.dataset.searchPick);
+        }
         window.SearchLog.add(input.value);
       });
     });
@@ -225,6 +241,32 @@ function initSearch() {
 
   input.addEventListener("input", runSearch);
   input.addEventListener("focus", runSearch);
+
+  input.addEventListener("keydown", (e) => {
+    const items = Array.from(suggestBox.querySelectorAll(".suggestion-item"));
+    if (items.length === 0) return;
+    const currentIndex = items.findIndex((el) => el.classList.contains("kbd-active"));
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = items[Math.min(currentIndex + 1, items.length - 1)];
+      items.forEach((el) => el.classList.remove("kbd-active"));
+      next.classList.add("kbd-active");
+      next.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prev = items[Math.max(currentIndex - 1, 0)];
+      items.forEach((el) => el.classList.remove("kbd-active"));
+      prev.classList.add("kbd-active");
+      prev.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter") {
+      const active = items[currentIndex] || items[0];
+      if (active) { e.preventDefault(); active.click(); }
+    } else if (e.key === "Escape") {
+      suggestBox.classList.add("hidden");
+      input.blur();
+    }
+  });
 
   clearBtn.addEventListener("click", () => {
     input.value = "";
