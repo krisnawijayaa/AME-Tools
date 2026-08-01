@@ -1,7 +1,9 @@
 {
+  "id": ".",
   "name": "AME Toolbox",
   "short_name": "AME Toolbox",
   "description": "Digital toolbox for Aircraft Maintenance Engineers: converters, calculators, and quick references.",
+  "version": "3.0.0",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

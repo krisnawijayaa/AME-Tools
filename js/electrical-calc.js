@@ -50,8 +50,11 @@ const ElectricalCalc = (() => {
   function show(id) {
     container.querySelectorAll(".type-pill").forEach((b) => b.classList.toggle("active", b.dataset.calc === id));
     const content = container.querySelector("#calcContent");
-    content.innerHTML = panelHtml(id);
+    content.innerHTML = panelHtml(id) + '<div id="elecCalcInfoPanel"></div>';
     bindPanel(id);
+    const infoIds = { ohm: "ohms-law", power: "power-calc", vdrop: "voltage-drop", series: "series-resistance", parallel: "parallel-resistance", battcap: "battery-capacity", battrun: "battery-runtime", awg: "awg-converter", wirer: "wire-resistance" };
+    const infoEl = content.querySelector("#elecCalcInfoPanel");
+    if (infoEl && window.ToolInfo) window.ToolInfo.render(infoEl, infoIds[id] || id);
     if (window.lucide) lucide.createIcons();
   }
 

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Settings — AME Toolbox</title>
+<meta name="theme-color" content="#0f1117" />
+<link rel="manifest" href="../manifest.json" />
+<link rel="icon" href="../assets/icons/icon-192.png" />
+<link rel="apple-touch-icon" href="../assets/icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="../css/main.css" />
+<link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-btn" href="../index.html" aria-label="Back">
+      <i data-lucide="arrow-left" style="width:18px;height:18px"></i>
+    </a>
+    <h1>Settings</h1>
+  </div>
+
+  <section class="section">
+    <div class="section-title"><h2>Appearance</h2></div>
+    <div class="type-selector" id="appearanceRow" style="padding:0;"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Units</h2></div>
+    <div class="type-selector" id="unitsRow" style="padding:0;"></div>
+    <p class="hint" style="margin-top:8px;">Preferensi ini digunakan sebagai default tampilan pada fitur mendatang yang membedakan metric/imperial.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Decimal Precision</h2></div>
+    <div class="type-selector" id="precisionRow" style="padding:0;"></div>
+    <p class="hint" style="margin-top:8px;">Jumlah angka di belakang koma pada semua hasil konversi &amp; kalkulasi.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Preferences</h2></div>
+    <div class="tool-list">
+      <div id="autoCopyRow"></div>
+      <div id="hapticsRow"></div>
+      <div id="animationsRow"></div>
+      <div id="keepAwakeRow"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Data</h2></div>
+    <div class="panel">
+      <p class="hint">Export mencakup Favorites, Bookmarks, History, Settings, dan Notes sebagai satu file JSON. Import akan menimpa data yang ada di perangkat ini.</p>
+      <div class="timer-controls" style="justify-content:flex-start;flex-wrap:wrap;">
+        <button class="chip" id="exportBtn"><i data-lucide="download" style="width:14px;height:14px"></i> Export Settings &amp; Data</button>
+        <label class="chip" for="importInput" style="cursor:pointer;">
+          <i data-lucide="upload" style="width:14px;height:14px"></i> Import Backup
+        </label>
+        <input type="file" id="importInput" accept="application/json" class="hidden" />
+        <button class="chip" id="resetBtn" style="color:var(--orange);"><i data-lucide="rotate-ccw" style="width:14px;height:14px"></i> Reset Settings</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="tool-list">
+      <a class="tool-row" href="about.html">
+        <div class="t-icon accent-blue"><i data-lucide="info" style="width:18px;height:18px"></i></div>
+        <div class="t-info"><div class="t-title">About AME Toolbox</div><div class="t-sub" id="settingsVersion">Version</div></div>
+        <i data-lucide="chevron-right" style="width:18px;height:18px;color:var(--text-faint)"></i>
+      </a>
+    </div>
+  </section>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="../index.html">
+      <i data-lucide="home" style="width:20px;height:20px"></i>
+      Home
+    </a>
+    <a class="nav-item" href="measurement.html">
+      <i data-lucide="ruler" style="width:20px;height:20px"></i>
+      Measure
+    </a>
+    <a class="nav-item" href="torque.html">
+      <i data-lucide="wrench" style="width:20px;height:20px"></i>
+      Torque
+    </a>
+    <a class="nav-item" href="electrical.html">
+      <i data-lucide="zap" style="width:20px;height:20px"></i>
+      Electrical
+    </a>
+    <a class="nav-item" href="general.html">
+      <i data-lucide="calculator" style="width:20px;height:20px"></i>
+      General
+    </a>
+  </nav>
+
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/ripple.js"></script>
+  <script defer src="../js/version.js"></script>
+  <script defer src="../js/favorites.js"></script>
+  <script defer src="../js/history.js"></script>
+  <script defer src="../js/calc-history.js"></script>
+  <script defer src="../js/notes.js"></script>
+  <script defer src="../js/settings.js"></script>
+  <script defer src="../js/export-import.js"></script>
+  <script defer src="../js/settings-page.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("../service-worker.js", { scope: "../" }).catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

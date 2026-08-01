@@ -12,6 +12,7 @@ let currentElecType = "voltage";
 let elecMode = "converters";
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   const params = new URLSearchParams(window.location.search);
   const requestedType = params.get("type");
   const requestedMode = params.get("mode");
@@ -74,4 +75,6 @@ function renderElecConverter(type) {
   const list = document.getElementById("converterList");
   document.getElementById("pageTitle").textContent = UNIT_DATA[type].label + " Converter";
   window.ConverterCore.render(list, type);
+  const infoEl = document.getElementById("elecInfoPanel");
+  if (infoEl && window.ToolInfo) window.ToolInfo.render(infoEl, "elec-" + type, UNIT_DATA[type].label);
 }

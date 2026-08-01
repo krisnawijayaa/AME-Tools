@@ -31,6 +31,8 @@
 
   <div class="calc-keypad" id="calcKeypad"></div>
 
+  <div id="calcInfoPanel" style="margin:0 16px;"></div>
+
   <section class="section">
     <div class="section-title">
       <h2>History</h2>
@@ -62,15 +64,21 @@
     </a>
   </nav>
 
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="../js/favorites.js"></script>
-  <script src="../js/history.js"></script>
-  <script src="../js/converter-core.js"></script>
-  <script src="../js/settings.js"></script>
-  <script src="../js/calc-history.js"></script>
-  <script src="../js/calculator.js"></script>
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/ripple.js"></script>
+  <script defer src="../data/tool-info.js"></script>
+  <script defer src="../js/favorites.js"></script>
+  <script defer src="../js/history.js"></script>
+  <script defer src="../js/settings.js"></script>
+  <script defer src="../js/converter-core.js"></script>
+  <script defer src="../js/tool-info.js"></script>
+  <script defer src="../js/calc-history.js"></script>
+  <script defer src="../js/calculator.js"></script>
   <script>
-    window.History.add("scientific-calculator");
+    document.addEventListener("DOMContentLoaded", () => {
+      window.History.add("scientific-calculator");
+    });
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("../service-worker.js", { scope: "../" }).catch(() => {});

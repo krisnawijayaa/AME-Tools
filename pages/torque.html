@@ -25,6 +25,7 @@
 
   <div id="unitPanel" class="fade-in">
     <div class="converter-list" id="torqueConverterList"></div>
+    <div id="torqueUnitInfoPanel"></div>
   </div>
 
   <div id="extensionPanel" class="fade-in hidden"></div>
@@ -55,13 +56,18 @@
     </a>
   </nav>
 
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="../data/units.js"></script>
-  <script src="../data/aliases.js"></script>
-  <script src="../js/favorites.js"></script>
-  <script src="../js/history.js"></script>
-  <script src="../js/converter-core.js"></script>
-  <script src="../js/torque.js"></script>
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/ripple.js"></script>
+  <script defer src="../data/units.js"></script>
+  <script defer src="../data/aliases.js"></script>
+  <script defer src="../data/tool-info.js"></script>
+  <script defer src="../js/favorites.js"></script>
+  <script defer src="../js/history.js"></script>
+  <script defer src="../js/settings.js"></script>
+  <script defer src="../js/converter-core.js"></script>
+  <script defer src="../js/tool-info.js"></script>
+  <script defer src="../js/torque.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {

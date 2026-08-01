@@ -17,6 +17,7 @@ const TOOL_ITEMS = [
 let activeTool = "compass";
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("tool");
   activeTool = TOOL_ITEMS.some((t) => t.id === requested) ? requested : "compass";

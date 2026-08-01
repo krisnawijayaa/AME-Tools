@@ -4,23 +4,31 @@
  * Bump CACHE_VERSION whenever any cached file changes so old caches get purged.
  */
 
-const CACHE_VERSION = "ame-toolbox-v2";
+const CACHE_VERSION = "ame-toolbox-v3";
 const SCOPE = self.registration.scope; // works correctly under GitHub Pages subpaths too
 
 // Build absolute URLs relative to the service worker's registration scope
 const CORE_ASSETS = [
   "",
   "index.html",
+  "offline.html",
   "manifest.json",
   "css/main.css",
   "css/responsive.css",
+  "js/toast.js",
+  "js/ripple.js",
+  "js/version.js",
   "js/app.js",
   "js/search.js",
   "js/favorites.js",
   "js/history.js",
   "js/settings.js",
+  "js/settings-page.js",
+  "js/export-import.js",
+  "js/notes.js",
   "js/calc-history.js",
   "js/converter-core.js",
+  "js/tool-info.js",
   "js/measurement.js",
   "js/torque.js",
   "js/electrical.js",
@@ -35,12 +43,15 @@ const CORE_ASSETS = [
   "js/tool-flashlight.js",
   "data/units.js",
   "data/aliases.js",
+  "data/tool-info.js",
   "pages/measurement.html",
   "pages/torque.html",
   "pages/electrical.html",
   "pages/general.html",
   "pages/tools.html",
   "pages/calculator.html",
+  "pages/settings.html",
+  "pages/about.html",
   "assets/icons/icon-72.png",
   "assets/icons/icon-96.png",
   "assets/icons/icon-128.png",
@@ -97,9 +108,11 @@ self.addEventListener("fetch", (event) => {
           return res;
         })
         .catch(() => {
-          // Offline fallback: for navigations, serve the cached index shell
+          // Offline fallback: for navigations, try the cached shell first,
+          // then the dedicated offline page as a last resort.
           if (req.mode === "navigate") {
-            return caches.match(new URL("index.html", SCOPE).toString());
+            return caches.match(new URL("index.html", SCOPE).toString())
+              .then((shell) => shell || caches.match(new URL("offline.html", SCOPE).toString()));
           }
           return new Response("", { status: 408, statusText: "Offline" });
         });

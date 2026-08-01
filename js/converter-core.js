@@ -91,9 +91,11 @@ const ConverterCore = (() => {
 
   function formatNumber(num) {
     if (!isFinite(num)) return "";
-    return Math.abs(num) < 0.0001 && num !== 0
-      ? num.toExponential(4)
-      : parseFloat(num.toFixed(6)).toString();
+    const precision = window.Settings ? window.Settings.get("precision", 4) : 4;
+    if (Math.abs(num) < Math.pow(10, -precision) && num !== 0 && precision < 6) {
+      return num.toExponential(Math.max(precision, 2));
+    }
+    return parseFloat(num.toFixed(precision)).toString();
   }
 
   return { render, convert, formatNumber };

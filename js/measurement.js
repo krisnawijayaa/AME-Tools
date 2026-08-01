@@ -13,6 +13,7 @@ const MEASUREMENT_TYPES = [
 let currentType = "length";
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("type");
   currentType = MEASUREMENT_TYPES.includes(requested) ? requested : "length";
@@ -46,4 +47,7 @@ function renderConverter(type) {
   const list = document.getElementById("converterList");
   document.getElementById("pageTitle").textContent = UNIT_DATA[type].label + " Converter";
   window.ConverterCore.render(list, type);
+
+  const infoEl = document.getElementById("measurementInfoPanel");
+  if (infoEl && window.ToolInfo) window.ToolInfo.render(infoEl, "measure-" + type, UNIT_DATA[type].label);
 }

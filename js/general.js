@@ -20,6 +20,7 @@ const GENERAL_TOOLS = [
 let activeGeneralTab = "dec2frac";
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("tab");
   activeGeneralTab = GENERAL_TOOLS.some((t) => t.id === requested) ? requested : "dec2frac";
@@ -77,8 +78,10 @@ function renderDec2Frac() {
         <div class="f-item"><div class="f-val" id="frac16">–</div><div class="f-label">Nearest 1/16"</div></div>
         <div class="f-item"><div class="f-val" id="fracExact">–</div><div class="f-label">Simplified</div></div>
       </div>
-    </div>`;
+    </div>
+    <div id="d2fInfoPanel"></div>`;
   document.getElementById("decInput").addEventListener("input", calcDec2Frac);
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("d2fInfoPanel"), "decimal-fraction");
 }
 
 function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
@@ -123,8 +126,10 @@ function renderFrac2Dec() {
         <div class="input-group"><input type="text" id="fracInput" placeholder='e.g. 3/8 or 1 1/2' autocomplete="off" /></div></div>
       <div class="result-box"><div class="r-label">Decimal</div>
         <div><span class="r-value" id="fracDecResult">–</span><span class="r-unit">in</span></div></div>
-    </div>`;
+    </div>
+    <div id="f2dInfoPanel"></div>`;
   document.getElementById("fracInput").addEventListener("input", calcFrac2Dec);
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("f2dInfoPanel"), "fraction-decimal");
 }
 
 function calcFrac2Dec() {
@@ -165,7 +170,9 @@ function renderBaseConverter() {
         <div class="base-row"><div class="b-label">ASCII</div><input type="text" id="baseAscii" placeholder="e.g. H" autocomplete="off" maxlength="1" /></div>
       </div>
       <p class="hint" style="margin-top:10px;">Catatan: ASCII hanya mendukung 1 karakter (0–255).</p>
-    </div>`;
+    </div>
+    <div id="baseInfoPanel"></div>`;
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("baseInfoPanel"), "number-base");
 
   const binEl = document.getElementById("baseBinary"), decEl = document.getElementById("baseDecimal"), octEl = document.getElementById("baseOctal"), hexEl = document.getElementById("baseHex"), asciiEl = document.getElementById("baseAscii");
 

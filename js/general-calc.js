@@ -26,7 +26,9 @@ const GeneralCalc = (() => {
         <div class="field"><label>Y</label><div class="input-group"><input type="text" inputmode="decimal" id="pctY" placeholder="0" autocomplete="off" /></div></div>
         <div class="result-box"><div class="r-label">X is what % of Y</div><div><span class="r-value" id="pctOfResult">–</span><span class="r-unit">%</span></div></div>
         <div class="result-box" style="margin-top:10px;"><div class="r-label">X% of Y</div><div><span class="r-value" id="pctValResult">–</span></div></div>
-      </div>`;
+      </div>
+      <div id="pctInfoPanel"></div>`;
+    if (window.ToolInfo) window.ToolInfo.render(document.getElementById("pctInfoPanel"), "percentage-calculator");
     const calc = () => {
       const x = parseFloat(document.getElementById("pctX").value.replace(",", "."));
       const y = parseFloat(document.getElementById("pctY").value.replace(",", "."));
@@ -49,7 +51,9 @@ const GeneralCalc = (() => {
         <div class="field"><label>B</label><div class="input-group"><input type="text" inputmode="decimal" id="ratB" placeholder="0" autocomplete="off" /></div></div>
         <div class="field"><label>C</label><div class="input-group"><input type="text" inputmode="decimal" id="ratC" placeholder="0" autocomplete="off" /></div></div>
         <div class="result-box"><div class="r-label">D (A:B = C:D)</div><div><span class="r-value" id="ratResult">–</span></div></div>
-      </div>`;
+      </div>
+      <div id="ratInfoPanel"></div>`;
+    if (window.ToolInfo) window.ToolInfo.render(document.getElementById("ratInfoPanel"), "ratio-calculator");
     const calc = () => {
       const a = parseFloat(document.getElementById("ratA").value.replace(",", "."));
       const b = parseFloat(document.getElementById("ratB").value.replace(",", "."));
@@ -75,7 +79,9 @@ const GeneralCalc = (() => {
           <div class="input-group" style="margin-top:8px;"><input type="text" inputmode="numeric" id="sciExponent" placeholder="exponent" style="text-align:left;" autocomplete="off" /></div>
         </div>
         <div class="result-box" style="margin-top:10px;"><div class="r-label">Standard Value</div><div><span class="r-value" id="sciBackResult">–</span></div></div>
-      </div>`;
+      </div>
+      <div id="sciInfoPanel"></div>`;
+    if (window.ToolInfo) window.ToolInfo.render(document.getElementById("sciInfoPanel"), "scientific-notation");
     document.getElementById("sciStandard").addEventListener("input", () => {
       const v = parseFloat(document.getElementById("sciStandard").value.replace(",", "."));
       document.getElementById("sciResult").textContent = isNaN(v) ? "–" : v.toExponential(4).replace("e", " × 10^");
@@ -100,7 +106,9 @@ const GeneralCalc = (() => {
         <div class="field"><label>From</label><div class="input-group"><input type="date" id="ddFrom" style="color:var(--text);background:none;border:none;outline:none;font-size:15px;flex:1;" /></div></div>
         <div class="field"><label>To</label><div class="input-group"><input type="date" id="ddTo" style="color:var(--text);background:none;border:none;outline:none;font-size:15px;flex:1;" /></div></div>
         <div class="result-box"><div class="r-label">Difference</div><div><span class="r-value" id="ddResult">–</span></div></div>
-      </div>`;
+      </div>
+      <div id="ddInfoPanel"></div>`;
+    if (window.ToolInfo) window.ToolInfo.render(document.getElementById("ddInfoPanel"), "date-difference");
     const calc = () => {
       const from = document.getElementById("ddFrom").value;
       const to = document.getElementById("ddTo").value;

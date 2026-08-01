@@ -19,6 +19,7 @@ const TORQUE_TABS = [
 let activeTab = "unit";
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   const params = new URLSearchParams(window.location.search);
   const requested = params.get("tab");
   activeTab = TORQUE_TABS.some((t) => t.id === requested) ? requested : "unit";
@@ -63,6 +64,8 @@ function switchTab(tab) {
 function renderTorqueUnitConverter() {
   const list = document.getElementById("torqueConverterList");
   window.ConverterCore.render(list, "torque");
+  const infoEl = document.getElementById("torqueUnitInfoPanel");
+  if (infoEl && window.ToolInfo) window.ToolInfo.render(infoEl, "torque-unit-converter", "Torque");
 }
 
 function toMillimeters(value, unit) {
@@ -96,7 +99,9 @@ function renderExtensionCalculator() {
         <div class="input-group"><input type="text" inputmode="decimal" id="extExtLen" placeholder="0" autocomplete="off" />${lengthUnitSelect("extLenUnit2")}</div></div>
       <div class="result-box"><div class="r-label">Correct Torque Setting</div>
         <div><span class="r-value" id="extResultValue">–</span><span class="r-unit" id="extResultUnit"></span></div></div>
-    </div>`;
+    </div>
+    <div id="extInfoPanel"></div>`;
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("extInfoPanel"), "torque-extension");
   ["extDesired", "extWrenchLen", "extExtLen", "extUnit", "extLenUnit1", "extLenUnit2"].forEach((id) => {
     document.getElementById(id).addEventListener("input", calcExtensionTorque);
     document.getElementById(id).addEventListener("change", calcExtensionTorque);
@@ -135,7 +140,9 @@ function renderCrowfootCalculator() {
         <div class="input-group"><select id="cfOrientation"><option value="inline">In-line (needs correction)</option><option value="perpendicular">Perpendicular / 90° (no correction)</option></select></div></div>
       <div class="result-box"><div class="r-label">Correct Torque Setting</div>
         <div><span class="r-value" id="cfResultValue">–</span><span class="r-unit" id="cfResultUnit"></span></div></div>
-    </div>`;
+    </div>
+    <div id="cfInfoPanel"></div>`;
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("cfInfoPanel"), "torque-crowfoot");
   ["cfDesired", "cfWrenchLen", "cfExtLen", "cfUnit", "cfLenUnit1", "cfLenUnit2", "cfOrientation"].forEach((id) => {
     document.getElementById(id).addEventListener("input", calcCrowfoot);
     document.getElementById(id).addEventListener("change", calcCrowfoot);
@@ -181,7 +188,9 @@ function renderAngleCalculator() {
         <div class="input-group"><input type="text" inputmode="numeric" id="angSteps" placeholder="1" autocomplete="off" /></div></div>
       <div class="result-box"><div class="r-label">Spec Summary</div>
         <div><span class="r-value" id="angResultValue" style="font-size:16px;">–</span></div></div>
-    </div>`;
+    </div>
+    <div id="angInfoPanel"></div>`;
+  if (window.ToolInfo) window.ToolInfo.render(document.getElementById("angInfoPanel"), "torque-angle");
   ["angTorque", "angUnit", "angDegrees", "angSteps"].forEach((id) => {
     document.getElementById(id).addEventListener("input", calcAngle);
     document.getElementById(id).addEventListener("change", calcAngle);

@@ -904,3 +904,248 @@ button { font-family: inherit; }
   border-color: var(--orange);
   color: var(--orange);
 }
+
+/* ========================================================
+   V3 additions — Settings, About, offline banner, footer,
+   ripple/skeleton, accessibility (focus-visible, contrast).
+   ======================================================== */
+
+/* ---------- Light theme override (Appearance: Light / System) ---------- */
+:root[data-theme="light"] {
+  --bg: #f4f5f8;
+  --card: #ffffff;
+  --card-hover: #eef0f5;
+  --border: #e1e4ea;
+  --text: #12141c;
+  --text-dim: #5b6272;
+  --text-faint: #8a90a0;
+  --shadow: 0 4px 20px rgba(20, 22, 30, 0.08);
+}
+
+/* ---------- Reduced-motion / "Enable Animations" off ---------- */
+.no-animations, .no-animations * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* ---------- Offline banner ---------- */
+.offline-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 16px 0;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--orange-bg);
+  color: var(--orange);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  text-align: center;
+  padding: 18px 16px 8px;
+  color: var(--text-faint);
+  font-size: 11.5px;
+}
+
+/* ---------- Settings: toggle switch ---------- */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.settings-row-text { min-width: 0; }
+.settings-row-label { font-size: 14px; font-weight: 600; }
+.settings-row-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: var(--border);
+  border-radius: 30px;
+  transition: background var(--transition);
+}
+
+.switch-slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+}
+
+.switch input:checked + .switch-slider {
+  background: var(--blue);
+}
+
+.switch input:checked + .switch-slider::before {
+  transform: translateX(20px);
+}
+
+.switch input:disabled + .switch-slider {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---------- Tool Info panel ---------- */
+.info-toggle-wrap {
+  margin: 4px 16px 16px;
+}
+
+.info-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.info-toggle-btn:active { background: var(--card-hover); }
+.info-toggle-btn span { flex: 1; text-align: left; }
+.info-chevron { transition: transform var(--transition); }
+.info-toggle-btn.open .info-chevron { transform: rotate(180deg); }
+
+.info-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: 4px 14px 14px;
+  margin-top: -1px;
+}
+
+.info-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 8px 0 12px;
+}
+
+.info-row {
+  margin-bottom: 12px;
+}
+
+.info-row:last-child { margin-bottom: 0; }
+
+.info-row-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+
+.info-row p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.info-formula-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.info-formula {
+  flex: 1;
+  font-family: "SF Mono", "Roboto Mono", monospace;
+  font-size: 13px;
+  color: var(--blue);
+  word-break: break-word;
+}
+
+/* ---------- Skeleton loading ---------- */
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--card-hover) 37%, var(--card) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-pulse 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* ---------- Ripple effect ---------- */
+.ripple-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: ripple-anim 500ms ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-anim {
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* ---------- Accessibility: focus visibility & touch targets ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.type-pill:focus-visible,
+.category-card:focus-visible,
+.tool-row:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+button, .chip, .fav-btn, .nav-item, .back-btn {
+  min-height: 36px;
+  min-width: 36px;
+}
+
+/* ---------- Empty-state (search / lists) refinement for a11y ---------- */
+.suggestion-empty[role="status"] {
+  text-align: center;
+}

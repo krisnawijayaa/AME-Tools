@@ -117,6 +117,28 @@ Struktur ini modular — setiap fitur punya file JS sendiri, sehingga menambah c
 
 **Refactor** — logic konversi unit realtime yang sebelumnya terduplikasi di `measurement.js`, `electrical.js`, dan `torque.js` kini terpusat di satu modul reusable: `js/converter-core.js`.
 
+## 🆕 V3 Changelog — Production Polish
+
+**Settings** (`pages/settings.html`) — Appearance (Dark/Light/System), preferred Units (Metric/Imperial), Decimal Precision (0–5, applied app-wide via `converter-core.js`), Preferences (Auto Copy, Haptic Feedback, Animations, Keep Screen Awake via Wake Lock API), and Data (Export/Import/Reset).
+
+**About** (`pages/about.html`) — logo, version, changelog, privacy policy, license, acknowledgements.
+
+**Export / Import** — one JSON backup covering Favorites, Bookmarks, History, Calc History, Settings, and Notes (`js/export-import.js`).
+
+**Tool Info panels** — every calculator and unit converter now has a collapsible "Info & Formula" panel (Description, Formula, Example, Common Uses, Tips, Copy Formula) via the reusable `js/tool-info.js` + `data/tool-info.js`.
+
+**Home** — added Last Opened Tool, app version footer, Quick Access shortcuts (Calculator/Settings/About/Tools), and an offline-status banner.
+
+**Search** — added typo tolerance (Levenshtein fallback when no direct match is found).
+
+**Reliability** — global error/unhandledrejection handler with friendly toast messages, offline banner, offline.html fallback page.
+
+**Accessibility** — focus-visible outlines, aria-labels on search/nav/buttons, larger minimum touch targets, `aria-live` toast region.
+
+**Performance** — all page scripts now load with `defer`; service worker cache bumped to v3 and covers every new file.
+
+**Code quality** — extracted the duplicated toast/snackbar logic into a single shared `js/toast.js` used by every page; added a lightweight shared `js/ripple.js` for button feedback that respects the Animations setting.
+
 ---
 
 Dibuat untuk komunitas AME — kontribusi & masukan sangat terbuka.

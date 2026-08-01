@@ -11,10 +11,13 @@ let memory = 0;
 let lastAnswer = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   renderKeypad();
   renderHistory();
   updateDisplay();
   updateAngleBtn();
+  const infoEl = document.getElementById("calcInfoPanel");
+  if (infoEl && window.ToolInfo) window.ToolInfo.render(infoEl, "scientific-calculator");
   if (window.lucide) lucide.createIcons();
 });
 
@@ -48,6 +51,7 @@ function renderKeypad() {
 }
 
 function handleKey(key) {
+  if (window.Settings) window.Settings.vibrate(10);
   switch (key) {
     case "AC": expr = ""; break;
     case "DEL": expr = expr.slice(0, -1); break;
@@ -137,6 +141,10 @@ function evaluate() {
   expr = formatted;
   updateDisplay();
   renderHistory();
+
+  if (window.Settings && window.Settings.get("autoCopy") && navigator.clipboard) {
+    navigator.clipboard.writeText(formatted).then(() => window.showToast && window.showToast("Result copied"));
+  }
 }
 
 function copyResult() {

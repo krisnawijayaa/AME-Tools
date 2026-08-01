@@ -72,12 +72,55 @@ const Search = (() => {
 
   function query(q) {
     if (!q || !q.trim()) return [];
-    const results = window.TOOL_INDEX
+    const exact = window.TOOL_INDEX
       .map((entry) => ({ entry, score: scoreEntry(entry, q) }))
       .filter((r) => r.score > 0)
       .sort((a, b) => b.score - a.score)
       .map((r) => r.entry);
-    return results;
+
+    if (exact.length > 0) return exact;
+
+    // Typo tolerance fallback: only kicks in when normal matching finds
+    // nothing, so it never outranks a real match.
+    return fuzzyQuery(q);
+  }
+
+  /** Simple Levenshtein distance, used only as a typo-tolerance fallback. */
+  function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    if (m === 0) return n;
+    if (n === 0) return m;
+    const row = Array(n + 1);
+    for (let j = 0; j <= n; j++) row[j] = j;
+    for (let i = 1; i <= m; i++) {
+      let prev = row[0];
+      row[0] = i;
+      for (let j = 1; j <= n; j++) {
+        const tmp = row[j];
+        row[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, row[j], row[j - 1]);
+        prev = tmp;
+      }
+    }
+    return row[n];
+  }
+
+  function fuzzyQuery(q) {
+    const query = normalize(q);
+    const maxDistance = query.length <= 4 ? 1 : 2;
+    const matches = [];
+
+    window.TOOL_INDEX.forEach((entry) => {
+      let best = Infinity;
+      [...entry.keywords, entry.title].forEach((kw) => {
+        normalize(kw).split(/\s+/).forEach((word) => {
+          const d = levenshtein(query, word);
+          if (d < best) best = d;
+        });
+      });
+      if (best <= maxDistance) matches.push({ entry, dist: best });
+    });
+
+    return matches.sort((a, b) => a.dist - b.dist).map((m) => m.entry);
   }
 
   return { query };

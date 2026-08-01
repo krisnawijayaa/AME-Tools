@@ -20,25 +20,40 @@
 <body>
 
   <header class="app-header">
-    <div class="brand">
-      <div class="brand-icon"><i data-lucide="wrench" style="width:20px;height:20px;color:#fff"></i></div>
-      <div>
-        <h1>AME Toolbox</h1>
-        <p>Converter &amp; calculator untuk Aircraft Maintenance Engineer</p>
+    <div class="brand" style="justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-icon"><i data-lucide="wrench" style="width:20px;height:20px;color:#fff"></i></div>
+        <div>
+          <h1>AME Toolbox</h1>
+          <p>Converter &amp; calculator untuk Aircraft Maintenance Engineer</p>
+        </div>
       </div>
+      <a class="back-btn" href="pages/settings.html" aria-label="Settings" style="flex-shrink:0;">
+        <i data-lucide="settings" style="width:18px;height:18px"></i>
+      </a>
     </div>
   </header>
+
+  <div id="offlineBanner" class="offline-banner hidden" role="status" aria-live="polite">
+    <i data-lucide="wifi-off" style="width:14px;height:14px"></i>
+    You're offline — all tools still work.
+  </div>
 
   <div class="search-wrap">
     <div class="search-box">
       <i data-lucide="search" style="width:18px;height:18px"></i>
-      <input type="text" id="searchInput" placeholder="Cari: mm, psi, torque, suhu, awg..." autocomplete="off" />
+      <input type="text" id="searchInput" placeholder="Cari: mm, psi, torque, suhu, awg..." autocomplete="off" aria-label="Search tools" />
       <button class="search-clear hidden" id="searchClear" aria-label="Clear search">
         <i data-lucide="x" style="width:16px;height:16px"></i>
       </button>
     </div>
-    <div class="search-suggestions hidden" id="searchSuggestions"></div>
+    <div class="search-suggestions hidden" id="searchSuggestions" role="listbox"></div>
   </div>
+
+  <section class="section hidden" id="lastOpenedSection">
+    <div class="section-title"><h2>Last Opened</h2></div>
+    <div class="tool-list" id="lastOpenedList"></div>
+  </section>
 
   <section class="section">
     <div class="section-title"><h2>Categories</h2></div>
@@ -51,7 +66,7 @@
   </section>
 
   <section class="section hidden" id="recentSection">
-    <div class="section-title"><h2>Recent</h2></div>
+    <div class="section-title"><h2>Recently Used</h2></div>
     <div class="tool-list" id="recentList"></div>
   </section>
 
@@ -59,6 +74,15 @@
     <div class="section-title"><h2>Favorites</h2></div>
     <div class="tool-list" id="favoritesList"></div>
   </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Quick Access</h2></div>
+    <div class="category-grid" id="quickAccessGrid"></div>
+  </section>
+
+  <footer class="app-footer">
+    <span id="footerVersion">AME Toolbox</span>
+  </footer>
 
   <nav class="bottom-nav">
     <a class="nav-item active" href="index.html">
@@ -83,12 +107,16 @@
     </a>
   </nav>
 
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="data/units.js"></script>
-  <script src="data/aliases.js"></script>
-  <script src="js/favorites.js"></script>
-  <script src="js/history.js"></script>
-  <script src="js/search.js"></script>
-  <script src="js/app.js"></script>
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script defer src="js/toast.js"></script>
+  <script defer src="js/ripple.js"></script>
+  <script defer src="js/version.js"></script>
+  <script defer src="data/units.js"></script>
+  <script defer src="data/aliases.js"></script>
+  <script defer src="js/favorites.js"></script>
+  <script defer src="js/history.js"></script>
+  <script defer src="js/settings.js"></script>
+  <script defer src="js/search.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>About — AME Toolbox</title>
+<meta name="theme-color" content="#0f1117" />
+<link rel="manifest" href="../manifest.json" />
+<link rel="icon" href="../assets/icons/icon-192.png" />
+<link rel="apple-touch-icon" href="../assets/icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="../css/main.css" />
+<link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-btn" href="settings.html" aria-label="Back">
+      <i data-lucide="arrow-left" style="width:18px;height:18px"></i>
+    </a>
+    <h1>About</h1>
+  </div>
+
+  <div class="panel" style="text-align:center;">
+    <div class="brand-icon" style="width:56px;height:56px;margin:0 auto 12px;">
+      <i data-lucide="wrench" style="width:28px;height:28px;color:#fff"></i>
+    </div>
+    <h3 style="margin-bottom:2px;">AME Toolbox</h3>
+    <p class="hint" id="aboutVersion">Version –</p>
+    <p class="hint" style="margin-top:10px;">Digital toolbox untuk Aircraft Maintenance Engineer — converter, calculator, dan reference, 100% offline, tanpa akun dan tanpa server.</p>
+  </div>
+
+  <section class="section">
+    <div class="section-title"><h2>Project</h2></div>
+    <div class="panel">
+      <p class="hint" style="margin-bottom:10px;">AME Toolbox dibangun sebagai Progressive Web App ringan: HTML, CSS, dan JavaScript murni, tanpa framework maupun backend. Seluruh data (Favorites, History, Settings, Notes) tersimpan lokal di perangkat kamu lewat localStorage — tidak pernah dikirim ke server mana pun.</p>
+      <div class="field"><label>Developer</label><p style="margin:0;font-size:14px;">AME Toolbox Community Project</p></div>
+      <div class="field" style="margin-bottom:0;"><label>Source</label>
+        <a class="chip" href="https://github.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex;">
+          <i data-lucide="github" style="width:14px;height:14px"></i> GitHub Repository
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Changelog</h2></div>
+    <div class="tool-list">
+      <div class="tool-row" style="align-items:flex-start;">
+        <div class="t-icon accent-green"><i data-lucide="sparkles" style="width:18px;height:18px"></i></div>
+        <div class="t-info">
+          <div class="t-title">V3 — Production Polish</div>
+          <div class="t-sub">Settings page, Export/Import, tool Info &amp; Formula panels, About page, reliability &amp; accessibility improvements.</div>
+        </div>
+      </div>
+      <div class="tool-row" style="align-items:flex-start;">
+        <div class="t-icon accent-purple"><i data-lucide="layers" style="width:18px;height:18px"></i></div>
+        <div class="t-info">
+          <div class="t-title">V2 — Expanded Toolbox</div>
+          <div class="t-sub">Density/Flow/Force/Energy, Torque Crowfoot &amp; Angle calc, 9 Electrical calculators, Scientific Calculator, Compass/Stopwatch/Timer/Level/Protractor/Flashlight.</div>
+        </div>
+      </div>
+      <div class="tool-row" style="align-items:flex-start;">
+        <div class="t-icon accent-blue"><i data-lucide="rocket" style="width:18px;height:18px"></i></div>
+        <div class="t-info">
+          <div class="t-title">V1 — Initial Release</div>
+          <div class="t-sub">Measurement, Torque, Electrical, and General converters with realtime multilingual search.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Privacy Policy</h2></div>
+    <div class="panel">
+      <p class="hint">AME Toolbox tidak mengumpulkan, mengirim, atau membagikan data pribadi apa pun. Tidak ada akun, tidak ada tracking, tidak ada iklan. Semua Favorites, History, dan Settings hanya tersimpan di localStorage browser kamu, dan bisa dihapus kapan saja lewat Settings → Reset, atau dengan menghapus data situs dari browser.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>License</h2></div>
+    <div class="panel">
+      <p class="hint">Dirilis di bawah lisensi MIT. Bebas digunakan, dimodifikasi, dan didistribusikan ulang, termasuk untuk keperluan komersial, selama notice lisensi tetap disertakan.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><h2>Acknowledgements</h2></div>
+    <div class="panel">
+      <p class="hint">Ikon oleh <strong>Lucide</strong> (lucide.dev), didistribusikan di bawah lisensi ISC.</p>
+    </div>
+  </section>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="../index.html">
+      <i data-lucide="home" style="width:20px;height:20px"></i>
+      Home
+    </a>
+    <a class="nav-item" href="measurement.html">
+      <i data-lucide="ruler" style="width:20px;height:20px"></i>
+      Measure
+    </a>
+    <a class="nav-item" href="torque.html">
+      <i data-lucide="wrench" style="width:20px;height:20px"></i>
+      Torque
+    </a>
+    <a class="nav-item" href="electrical.html">
+      <i data-lucide="zap" style="width:20px;height:20px"></i>
+      Electrical
+    </a>
+    <a class="nav-item" href="general.html">
+      <i data-lucide="calculator" style="width:20px;height:20px"></i>
+      General
+    </a>
+  </nav>
+
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script defer src="../js/toast.js"></script>
+  <script defer src="../js/ripple.js"></script>
+  <script defer src="../js/version.js"></script>
+  <script defer src="../js/settings.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.Settings) window.Settings.apply();
+      document.getElementById("aboutVersion").textContent = `Version ${window.APP_VERSION || "?"} (build ${window.APP_BUILD_DATE || "?"})`;
+      if (window.lucide) lucide.createIcons();
+    });
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("../service-worker.js", { scope: "../" }).catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

@@ -19,11 +19,17 @@ const CATEGORIES = [
 const POPULAR_IDS = ["length", "pressure", "torque-unit", "temperature", "voltage", "weight"];
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.Settings) window.Settings.apply();
   renderCategories();
   renderPopular();
+  renderLastOpened();
   renderRecent();
   renderFavorites();
+  renderQuickAccess();
+  renderFooterVersion();
   initSearch();
+  initOfflineBanner();
+  initGlobalErrorHandling();
   registerServiceWorker();
 });
 
@@ -62,11 +68,32 @@ function renderPopular() {
   if (window.lucide) lucide.createIcons();
 }
 
+function renderLastOpened() {
+  const section = document.getElementById("lastOpenedSection");
+  const list = document.getElementById("lastOpenedList");
+  if (!list) return;
+  const ids = window.History.getAll();
+  if (ids.length === 0) {
+    section.classList.add("hidden");
+    return;
+  }
+  const last = findToolEntry(ids[0]);
+  if (!last) {
+    section.classList.add("hidden");
+    return;
+  }
+  section.classList.remove("hidden");
+  list.innerHTML = toolRowHtml(last);
+  if (window.lucide) lucide.createIcons();
+  bindFavButtons(list);
+}
+
 function renderRecent() {
   const section = document.getElementById("recentSection");
   const list = document.getElementById("recentList");
   if (!list) return;
-  const ids = window.History.getAll();
+  // Skip the first entry — it's already shown in "Last Opened" above.
+  const ids = window.History.getAll().slice(1);
   if (ids.length === 0) {
     section.classList.add("hidden");
     return;
@@ -218,22 +245,53 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-/* ---------------- Toast ---------------- */
-let toastTimer = null;
-function showToast(message) {
-  let toast = document.getElementById("toast");
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "toast";
-    toast.className = "toast";
-    document.body.appendChild(toast);
-  }
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+/* ---------------- Quick Access ---------------- */
+const QUICK_ACCESS = [
+  { name: "Scientific Calculator", icon: "calculator", color: "purple", url: "pages/calculator.html", desc: "Trig, log, memory" },
+  { name: "Settings", icon: "settings", color: "blue", url: "pages/settings.html", desc: "Appearance, units, backup" },
+  { name: "About", icon: "info", color: "green", url: "pages/about.html", desc: "Version, changelog, license" },
+  { name: "Tools", icon: "compass", color: "orange", url: "pages/tools.html", desc: "Compass, stopwatch, level" }
+];
+
+function renderQuickAccess() {
+  const grid = document.getElementById("quickAccessGrid");
+  if (!grid) return;
+  grid.innerHTML = QUICK_ACCESS.map((q) => `
+    <a class="category-card" href="${q.url}">
+      <div class="cat-icon accent-${q.color}">${iconSvg(q.icon, 22)}</div>
+      <div class="cat-name">${q.name}</div>
+      <div class="cat-desc">${q.desc}</div>
+    </a>
+  `).join("");
+  if (window.lucide) lucide.createIcons();
 }
-window.showToast = showToast;
+
+/* ---------------- Footer version ---------------- */
+function renderFooterVersion() {
+  const el = document.getElementById("footerVersion");
+  if (el) el.textContent = `AME Toolbox v${window.APP_VERSION || "?"}`;
+}
+
+/* ---------------- Offline banner ---------------- */
+function initOfflineBanner() {
+  const banner = document.getElementById("offlineBanner");
+  if (!banner) return;
+  const update = () => banner.classList.toggle("hidden", navigator.onLine);
+  window.addEventListener("online", update);
+  window.addEventListener("offline", update);
+  update();
+}
+
+/* ---------------- Global error handling ---------------- */
+function initGlobalErrorHandling() {
+  window.addEventListener("error", () => {
+    // Keep it low-key: a script error shouldn't feel like a crash to the user.
+    if (window.showToast) window.showToast("Something went wrong. Please try again.");
+  });
+  window.addEventListener("unhandledrejection", () => {
+    if (window.showToast) window.showToast("Something went wrong. Please try again.");
+  });
+}
 
 /* ---------------- Service Worker ---------------- */
 function registerServiceWorker() {
